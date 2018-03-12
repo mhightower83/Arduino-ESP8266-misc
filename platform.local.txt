@@ -1,0 +1,34 @@
+#
+# Local platform.txt values
+#
+# Added this so I can tell one build from the other
+# It appears to override the one in platform.txt
+# name=ESP8266 Modules - 2.5.0 dev
+
+# Copy pasted this from platform.txt for reference.
+## These can be overridden in platform.local.txt
+# compiler.c.extra_flags=
+# compiler.c.elf.extra_flags=
+# compiler.S.extra_flags=
+# compiler.cpp.extra_flags=
+# compiler.ar.extra_flags=
+# compiler.objcopy.eep.extra_flags=
+# compiler.elf2hex.extra_flags=
+
+# Added these to boards.local.txt
+build.my_project_flags=
+build.espurna_flags=
+
+# By adding a global.h here, we can have all libraries reference a common
+# include. This include can have a symbolic link into our project folders
+# assuming you use the common duplicate include exclusion techniques.
+# Note, changes to global.h will effect all builds/sketches.
+# employ sketch conditionals in global.h for finer control.
+#
+# nothing seems to work - problem is I need to remove the .ino from the string.
+build.my_project_name=
+#-D{build.project_name}
+#
+compiler.c.extra_flags=-include "/home/mhightow/Arduino/include/global.h" {build.espurna_flags} {build.my_project_flags} {build.my_project_name}
+compiler.S.extra_flags=-include  {build.espurna_flags} {build.my_project_flags}
+compiler.cpp.extra_flags=-include "/home/mhightow/Arduino/include/global.h" {build.espurna_flags} {build.my_project_flags} {build.my_project_name}

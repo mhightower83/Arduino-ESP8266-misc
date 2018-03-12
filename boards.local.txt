@@ -1,0 +1,761 @@
+# Update with your USB Serial device. I had to add the .0 and 0x for this to work.
+# These entries will group up with those in boards.txt
+huzzah.vid.0=0x10C4
+huzzah.pid.0=0xEA60
+sonoff.vid.0=0x0403
+sonoff.pid.0=0x6001
+
+sonoff.menu.UploadSpeed.230400.linux=230400
+
+menu.my_project_flags=Project Build Flags
+menu.espurna_flags=ESPurna Build Flags
+
+espurna.menu.espurna_flags.none=none
+espurna.menu.espurna_flags.i2cSupport=I2C Support
+espurna.menu.espurna_flags.i2cSupport.build.espurna_flags=-DI2C_SUPPORT=1
+espurna.menu.espurna_flags.dallasSupport=Dallas Support
+espurna.menu.espurna_flags.dallasSupport.build.espurna_flags=-DDALLAS_SUPPORT=1
+espurna.menu.espurna_flags.dhtSupport=DHT Support# Added this so I can tell one build from the other
+espurna.menu.espurna_flags.dhtSupport.build.espurna_flags=-DDHT_SUPPORT=1
+espurna.menu.espurna_flags.hlw9012Support=HLW9012 Support
+espurna.menu.espurna_flags.hlw9012Support.build.espurna_flags=-DHLW8012_SUPPORT=1
+
+espurna.menu.my_project_flags.none=none
+espurna.menu.my_project_flags.nameresolv1=LLMNR Support
+espurna.menu.my_project_flags.nameresolv1.build.my_project_flags=-DLLMNR_SUPPORT
+espurna.menu.my_project_flags.nameresolv2=NetBIOS Support
+espurna.menu.my_project_flags.nameresolv2.build.my_project_flags=-DNETBIOS_SUPPORT
+espurna.menu.my_project_flags.nameresolv3=LLMNR and NetBIOS Support
+espurna.menu.my_project_flags.nameresolv3.build.my_project_flags=-DLLMNR_SUPPORT -DNETBIOS_SUPPORT
+
+sonoff.menu.my_project_flags.nameresolv3=LLMNR and NetBIOS Support
+sonoff.menu.my_project_flags.nameresolv3.build.my_project_flags=-DLLMNR_SUPPORT -DNETBIOS_SUPPORT
+sonoff.menu.my_project_flags.none=none
+sonoff.menu.my_project_flags.nameresolv1=LLMNR Support
+sonoff.menu.my_project_flags.nameresolv1.build.my_project_flags=-DLLMNR_SUPPORT
+sonoff.menu.my_project_flags.nameresolv2=NetBIOS Support
+sonoff.menu.my_project_flags.nameresolv2.build.my_project_flags=-DNETBIOS_SUPPORT
+
+##############################################################
+sonoff.name=ITEAD Sonoff
+sonoff.menu.BoardModel.sonoffBasicIR=ITEAD Sonoff Basic - IRremote
+sonoff.menu.BoardModel.sonoffBasicIR.build.board=SONOFF_BASIC
+#sonoff.menu.BoardModel.sonoffBasicIR.build.extra_flags=-DESP8266
+sonoff.menu.BoardModel.sonoffBasicIR.build.variant=sonoff
+sonoff.menu.BoardModel.sonoffBasic=ITEAD Sonoff Basic
+sonoff.menu.BoardModel.sonoffBasic.build.board=SONOFF_BASIC
+#sonoff.menu.BoardModel.sonoffBasic.build.extra_flags=-DESP8266
+sonoff.menu.BoardModel.sonoffBasic.build.variant=sonoff
+sonoff.menu.BoardModel.sonoffSV=ITEAD Sonoff SV
+sonoff.menu.BoardModel.sonoffSV.build.board=SONOFF_SV
+#sonoff.menu.BoardModel.sonoffSV.build.extra_flags=-DESP8266
+sonoff.menu.BoardModel.sonoffSV.build.variant=sonoff
+sonoff.menu.BoardModel.sonoffS20=ITEAD Sonoff S20
+sonoff.menu.BoardModel.sonoffS20.build.board=SONOFF_S20
+#sonoff.menu.BoardModel.sonoffS20.build.extra_flags=-DESP8266
+sonoff.menu.BoardModel.sonoffS20.build.variant=sonoff
+
+sonoff.build.board=ESP8266_GENERIC
+sonoff.upload.tool=esptool
+sonoff.upload.maximum_data_size=81920
+sonoff.upload.wait_for_upload_port=true
+sonoff.serial.disableDTR=true
+sonoff.serial.disableRTS=true
+sonoff.build.mcu=esp8266
+sonoff.build.core=esp8266
+sonoff.build.variant=generic
+sonoff.build.spiffs_pagesize=256
+sonoff.build.debug_port=
+sonoff.build.debug_level=
+sonoff.menu.CpuFrequency.80=80 MHz
+sonoff.menu.CpuFrequency.80.build.f_cpu=80000000L
+sonoff.menu.CpuFrequency.160=160 MHz
+sonoff.menu.CpuFrequency.160.build.f_cpu=160000000L
+sonoff.menu.ResetMethod.ck=ck
+sonoff.menu.ResetMethod.ck.upload.resetmethod=ck
+sonoff.menu.ResetMethod.nodemcu=nodemcu
+sonoff.menu.ResetMethod.nodemcu.upload.resetmethod=nodemcu
+sonoff.menu.ResetMethod.none=none
+sonoff.menu.ResetMethod.none.upload.resetmethod=none
+sonoff.menu.ResetMethod.dtrset=dtrset
+sonoff.menu.ResetMethod.dtrset.upload.resetmethod=dtrset
+# I think these devices all use 26 Mhz
+# sonoff.menu.CrystalFreq.26=26 MHz
+# sonoff.menu.CrystalFreq.40=40 MHz
+# sonoff.menu.CrystalFreq.40.build.extra_flags=-DF_CRYSTAL=40000000 -DESP8266
+sonoff.menu.FlashFreq.80=80MHz
+sonoff.menu.FlashFreq.80.build.flash_freq=80
+sonoff.menu.FlashFreq.40=40MHz
+sonoff.menu.FlashFreq.40.build.flash_freq=40
+sonoff.menu.FlashMode.qio=QIO
+sonoff.menu.FlashMode.qio.build.flash_mode=qio
+sonoff.menu.FlashMode.qout=QOUT
+sonoff.menu.FlashMode.qout.build.flash_mode=qout
+sonoff.menu.FlashMode.dio=DIO
+sonoff.menu.FlashMode.dio.build.flash_mode=dio
+sonoff.menu.FlashMode.dout=DOUT
+sonoff.menu.FlashMode.dout.build.flash_mode=dout
+sonoff.menu.FlashSize.16M15M=16M (15M SPIFFS)
+sonoff.menu.FlashSize.16M15M.build.flash_size=16M
+sonoff.menu.FlashSize.16M15M.build.flash_ld=eagle.flash.16m.ld
+sonoff.menu.FlashSize.16M15M.build.spiffs_pagesize=256
+sonoff.menu.FlashSize.16M15M.upload.maximum_size=1044464
+sonoff.menu.FlashSize.16M15M.build.spiffs_start=0x100000
+sonoff.menu.FlashSize.16M15M.build.spiffs_end=0xFFB000
+sonoff.menu.FlashSize.16M15M.build.spiffs_blocksize=8192
+sonoff.menu.FlashSize.1M0=1M (no SPIFFS)
+sonoff.menu.FlashSize.1M0.build.flash_size=1M
+sonoff.menu.FlashSize.1M0.build.flash_ld=eagle.flash.1m0.ld
+sonoff.menu.FlashSize.1M0.build.spiffs_pagesize=256
+sonoff.menu.FlashSize.1M0.upload.maximum_size=1023984
+sonoff.menu.FlashSize.1M64=1M (64K SPIFFS)
+sonoff.menu.FlashSize.1M64.build.flash_size=1M
+sonoff.menu.FlashSize.1M64.build.flash_ld=eagle.flash.1m64.ld
+sonoff.menu.FlashSize.1M64.build.spiffs_pagesize=256
+sonoff.menu.FlashSize.1M64.upload.maximum_size=958448
+sonoff.menu.FlashSize.1M64.build.spiffs_start=0xEB000
+sonoff.menu.FlashSize.1M64.build.spiffs_end=0xFB000
+sonoff.menu.FlashSize.1M64.build.spiffs_blocksize=4096
+sonoff.menu.FlashSize.1M128=1M (128K SPIFFS)
+sonoff.menu.FlashSize.1M128.build.flash_size=1M
+sonoff.menu.FlashSize.1M128.build.flash_ld=eagle.flash.1m128.ld
+sonoff.menu.FlashSize.1M128.build.spiffs_pagesize=256
+sonoff.menu.FlashSize.1M128.upload.maximum_size=892912
+sonoff.menu.FlashSize.1M128.build.spiffs_start=0xDB000
+sonoff.menu.FlashSize.1M128.build.spiffs_end=0xFB000
+sonoff.menu.FlashSize.1M128.build.spiffs_blocksize=4096
+sonoff.menu.FlashSize.1M144=1M (144K SPIFFS)
+sonoff.menu.FlashSize.1M144.build.flash_size=1M
+sonoff.menu.FlashSize.1M144.build.flash_ld=eagle.flash.1m144.ld
+sonoff.menu.FlashSize.1M144.build.spiffs_pagesize=256
+sonoff.menu.FlashSize.1M144.upload.maximum_size=876528
+sonoff.menu.FlashSize.1M144.build.spiffs_start=0xD7000
+sonoff.menu.FlashSize.1M144.build.spiffs_end=0xFB000
+sonoff.menu.FlashSize.1M144.build.spiffs_blocksize=4096
+sonoff.menu.FlashSize.1M160=1M (160K SPIFFS)
+sonoff.menu.FlashSize.1M160.build.flash_size=1M
+sonoff.menu.FlashSize.1M160.build.flash_ld=eagle.flash.1m160.ld
+sonoff.menu.FlashSize.1M160.build.spiffs_pagesize=256
+sonoff.menu.FlashSize.1M160.upload.maximum_size=860144
+sonoff.menu.FlashSize.1M160.build.spiffs_start=0xD3000
+sonoff.menu.FlashSize.1M160.build.spiffs_end=0xFB000
+sonoff.menu.FlashSize.1M160.build.spiffs_blocksize=4096
+sonoff.menu.FlashSize.1M192=1M (192K SPIFFS)
+sonoff.menu.FlashSize.1M192.build.flash_size=1M
+sonoff.menu.FlashSize.1M192.build.flash_ld=eagle.flash.1m192.ld
+sonoff.menu.FlashSize.1M192.build.spiffs_pagesize=256
+sonoff.menu.FlashSize.1M192.upload.maximum_size=827376
+sonoff.menu.FlashSize.1M192.build.spiffs_start=0xCB000
+sonoff.menu.FlashSize.1M192.build.spiffs_end=0xFB000
+sonoff.menu.FlashSize.1M192.build.spiffs_blocksize=4096
+sonoff.menu.FlashSize.1M256=1M (256K SPIFFS)
+sonoff.menu.FlashSize.1M256.build.flash_size=1M
+sonoff.menu.FlashSize.1M256.build.flash_ld=eagle.flash.1m256.ld
+sonoff.menu.FlashSize.1M256.build.spiffs_pagesize=256
+sonoff.menu.FlashSize.1M256.upload.maximum_size=761840
+sonoff.menu.FlashSize.1M256.build.spiffs_start=0xBB000
+sonoff.menu.FlashSize.1M256.build.spiffs_end=0xFB000
+sonoff.menu.FlashSize.1M256.build.spiffs_blocksize=4096
+sonoff.menu.FlashSize.1M512=1M (512K SPIFFS)
+sonoff.menu.FlashSize.1M512.build.flash_size=1M
+sonoff.menu.FlashSize.1M512.build.flash_ld=eagle.flash.1m512.ld
+sonoff.menu.FlashSize.1M512.build.spiffs_pagesize=256
+sonoff.menu.FlashSize.1M512.upload.maximum_size=499696
+sonoff.menu.FlashSize.1M512.build.spiffs_start=0x7B000
+sonoff.menu.FlashSize.1M512.build.spiffs_end=0xFB000
+sonoff.menu.FlashSize.1M512.build.spiffs_blocksize=8192
+sonoff.menu.FlashSize.2M=2M (1M SPIFFS)
+sonoff.menu.FlashSize.2M.build.flash_size=2M
+sonoff.menu.FlashSize.2M.build.flash_ld=eagle.flash.2m.ld
+sonoff.menu.FlashSize.2M.build.spiffs_pagesize=256
+sonoff.menu.FlashSize.2M.upload.maximum_size=1044464
+sonoff.menu.FlashSize.2M.build.spiffs_start=0x100000
+sonoff.menu.FlashSize.2M.build.spiffs_end=0x1FB000
+sonoff.menu.FlashSize.2M.build.spiffs_blocksize=8192
+sonoff.menu.FlashSize.4M1M=4M (1M SPIFFS)
+sonoff.menu.FlashSize.4M1M.build.flash_size=4M
+sonoff.menu.FlashSize.4M1M.build.flash_ld=eagle.flash.4m1m.ld
+sonoff.menu.FlashSize.4M1M.build.spiffs_pagesize=256
+sonoff.menu.FlashSize.4M1M.upload.maximum_size=1044464
+sonoff.menu.FlashSize.4M1M.build.spiffs_start=0x300000
+sonoff.menu.FlashSize.4M1M.build.spiffs_end=0x3FB000
+sonoff.menu.FlashSize.4M1M.build.spiffs_blocksize=8192
+sonoff.menu.FlashSize.4M3M=4M (3M SPIFFS)
+sonoff.menu.FlashSize.4M3M.build.flash_size=4M
+sonoff.menu.FlashSize.4M3M.build.flash_ld=eagle.flash.4m.ld
+sonoff.menu.FlashSize.4M3M.build.spiffs_pagesize=256
+sonoff.menu.FlashSize.4M3M.upload.maximum_size=1044464
+sonoff.menu.FlashSize.4M3M.build.spiffs_start=0x100000
+sonoff.menu.FlashSize.4M3M.build.spiffs_end=0x3FB000
+sonoff.menu.FlashSize.4M3M.build.spiffs_blocksize=8192
+sonoff.menu.FlashSize.8M7M=8M (7M SPIFFS)
+sonoff.menu.FlashSize.8M7M.build.flash_size=8M
+sonoff.menu.FlashSize.8M7M.build.flash_ld=eagle.flash.8m.ld
+sonoff.menu.FlashSize.8M7M.build.spiffs_pagesize=256
+sonoff.menu.FlashSize.8M7M.upload.maximum_size=1044464
+sonoff.menu.FlashSize.8M7M.build.spiffs_start=0x100000
+sonoff.menu.FlashSize.8M7M.build.spiffs_end=0x7FB000
+sonoff.menu.FlashSize.8M7M.build.spiffs_blocksize=8192
+sonoff.menu.LwIPVariant.v2mss536=v2 Lower Memory
+sonoff.menu.LwIPVariant.v2mss536.build.lwip_include=lwip2/include
+sonoff.menu.LwIPVariant.v2mss536.build.lwip_lib=-llwip2
+sonoff.menu.LwIPVariant.v2mss536.build.lwip_flags=-DLWIP_OPEN_SRC -DTCP_MSS=536
+sonoff.menu.LwIPVariant.v2mss1460=v2 Higher Bandwidth
+sonoff.menu.LwIPVariant.v2mss1460.build.lwip_include=lwip2/include
+sonoff.menu.LwIPVariant.v2mss1460.build.lwip_lib=-llwip2_1460
+sonoff.menu.LwIPVariant.v2mss1460.build.lwip_flags=-DLWIP_OPEN_SRC -DTCP_MSS=1460
+sonoff.menu.LwIPVariant.Prebuilt=v1.4 Higher Bandwidth
+sonoff.menu.LwIPVariant.Prebuilt.build.lwip_lib=-llwip_gcc
+sonoff.menu.LwIPVariant.Prebuilt.build.lwip_flags=-DLWIP_OPEN_SRC
+sonoff.menu.LwIPVariant.OpenSource=v1.4 Compile from source
+sonoff.menu.LwIPVariant.OpenSource.build.lwip_lib=-llwip_src
+sonoff.menu.LwIPVariant.OpenSource.build.lwip_flags=-DLWIP_OPEN_SRC
+sonoff.menu.LwIPVariant.OpenSource.recipe.hooks.sketch.prebuild.1.pattern=make -C "{runtime.platform.path}/tools/sdk/lwip/src" install TOOLS_PATH="{runtime.tools.xtensa-lx106-elf-gcc.path}/bin/xtensa-lx106-elf-"
+sonoff.menu.Debug.Disabled=Disabled
+sonoff.menu.Debug.Disabled.build.debug_port=
+sonoff.menu.Debug.Serial=Serial
+sonoff.menu.Debug.Serial.build.debug_port=-DDEBUG_ESP_PORT=Serial
+sonoff.menu.Debug.Serial1=Serial1
+sonoff.menu.Debug.Serial1.build.debug_port=-DDEBUG_ESP_PORT=Serial1
+sonoff.menu.DebugLevel.None____=None
+sonoff.menu.DebugLevel.None____.build.debug_level=
+sonoff.menu.DebugLevel.SSL=SSL
+sonoff.menu.DebugLevel.SSL.build.debug_level= -DDEBUG_ESP_SSL
+sonoff.menu.DebugLevel.TLS_MEM=TLS_MEM
+sonoff.menu.DebugLevel.TLS_MEM.build.debug_level= -DDEBUG_ESP_TLS_MEM
+sonoff.menu.DebugLevel.HTTP_CLIENT=HTTP_CLIENT
+sonoff.menu.DebugLevel.HTTP_CLIENT.build.debug_level= -DDEBUG_ESP_HTTP_CLIENT
+sonoff.menu.DebugLevel.HTTP_SERVER=HTTP_SERVER
+sonoff.menu.DebugLevel.HTTP_SERVER.build.debug_level= -DDEBUG_ESP_HTTP_SERVER
+sonoff.menu.DebugLevel.SSLTLS_MEM=SSL+TLS_MEM
+sonoff.menu.DebugLevel.SSLTLS_MEM.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM
+sonoff.menu.DebugLevel.SSLHTTP_CLIENT=SSL+HTTP_CLIENT
+sonoff.menu.DebugLevel.SSLHTTP_CLIENT.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_HTTP_CLIENT
+sonoff.menu.DebugLevel.SSLHTTP_SERVER=SSL+HTTP_SERVER
+sonoff.menu.DebugLevel.SSLHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_HTTP_SERVER
+sonoff.menu.DebugLevel.TLS_MEMHTTP_CLIENT=TLS_MEM+HTTP_CLIENT
+sonoff.menu.DebugLevel.TLS_MEMHTTP_CLIENT.build.debug_level= -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT
+sonoff.menu.DebugLevel.TLS_MEMHTTP_SERVER=TLS_MEM+HTTP_SERVER
+sonoff.menu.DebugLevel.TLS_MEMHTTP_SERVER.build.debug_level= -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_SERVER
+sonoff.menu.DebugLevel.HTTP_CLIENTHTTP_SERVER=HTTP_CLIENT+HTTP_SERVER
+sonoff.menu.DebugLevel.HTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+sonoff.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENT=SSL+TLS_MEM+HTTP_CLIENT
+sonoff.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENT.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT
+sonoff.menu.DebugLevel.SSLTLS_MEMHTTP_SERVER=SSL+TLS_MEM+HTTP_SERVER
+sonoff.menu.DebugLevel.SSLTLS_MEMHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_SERVER
+sonoff.menu.DebugLevel.SSLHTTP_CLIENTHTTP_SERVER=SSL+HTTP_CLIENT+HTTP_SERVER
+sonoff.menu.DebugLevel.SSLHTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+sonoff.menu.DebugLevel.TLS_MEMHTTP_CLIENTHTTP_SERVER=TLS_MEM+HTTP_CLIENT+HTTP_SERVER
+sonoff.menu.DebugLevel.TLS_MEMHTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+sonoff.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVER=SSL+TLS_MEM+HTTP_CLIENT+HTTP_SERVER
+sonoff.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+sonoff.menu.DebugLevel.CORE=CORE
+sonoff.menu.DebugLevel.CORE.build.debug_level= -DDEBUG_ESP_CORE
+sonoff.menu.DebugLevel.WIFI=WIFI
+sonoff.menu.DebugLevel.WIFI.build.debug_level= -DDEBUG_ESP_WIFI
+sonoff.menu.DebugLevel.HTTP_UPDATE=HTTP_UPDATE
+sonoff.menu.DebugLevel.HTTP_UPDATE.build.debug_level= -DDEBUG_ESP_HTTP_UPDATE
+sonoff.menu.DebugLevel.UPDATER=UPDATER
+sonoff.menu.DebugLevel.UPDATER.build.debug_level= -DDEBUG_ESP_UPDATER
+sonoff.menu.DebugLevel.OTA=OTA
+sonoff.menu.DebugLevel.OTA.build.debug_level= -DDEBUG_ESP_OTA
+sonoff.menu.DebugLevel.OOM=OOM
+sonoff.menu.DebugLevel.OOM.build.debug_level= -DDEBUG_ESP_OOM -include "umm_malloc/umm_malloc_cfg.h"
+sonoff.menu.DebugLevel.COREWIFIHTTP_UPDATEUPDATEROTAOOM=CORE+WIFI+HTTP_UPDATE+UPDATER+OTA+OOM
+sonoff.menu.DebugLevel.COREWIFIHTTP_UPDATEUPDATEROTAOOM.build.debug_level= -DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_ESP_OOM -include "umm_malloc/umm_malloc_cfg.h"
+sonoff.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVERCOREWIFIHTTP_UPDATEUPDATEROTAOOM=SSL+TLS_MEM+HTTP_CLIENT+HTTP_SERVER+CORE+WIFI+HTTP_UPDATE+UPDATER+OTA+OOM
+sonoff.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVERCOREWIFIHTTP_UPDATEUPDATEROTAOOM.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER -DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_ESP_OOM -include "umm_malloc/umm_malloc_cfg.h"
+sonoff.menu.DebugLevel.NoAssert-NDEBUG=NoAssert-NDEBUG
+sonoff.menu.DebugLevel.NoAssert-NDEBUG.build.debug_level= -DNDEBUG
+sonoff.menu.UploadSpeed.460800.linux=460800
+sonoff.menu.UploadSpeed.460800.macosx=460800
+sonoff.menu.UploadSpeed.460800.upload.speed=460800
+sonoff.menu.UploadSpeed.115200=115200
+sonoff.menu.UploadSpeed.115200.upload.speed=115200
+sonoff.menu.UploadSpeed.9600=9600
+sonoff.menu.UploadSpeed.9600.upload.speed=9600
+sonoff.menu.UploadSpeed.57600=57600
+sonoff.menu.UploadSpeed.57600.upload.speed=57600
+sonoff.menu.UploadSpeed.230400.linux=230400
+sonoff.menu.UploadSpeed.230400.macosx=230400
+sonoff.menu.UploadSpeed.230400.upload.speed=230400
+sonoff.menu.UploadSpeed.256000.windows=256000
+sonoff.menu.UploadSpeed.256000.upload.speed=256000
+sonoff.menu.UploadSpeed.512000.windows=512000
+sonoff.menu.UploadSpeed.512000.upload.speed=512000
+sonoff.menu.UploadSpeed.921600=921600
+sonoff.menu.UploadSpeed.921600.upload.speed=921600
+
+##############################################################
+espurna.name=ESPurna for ESP8266 based Modules
+espurna.menu.BoardModel.sonoffBasic=ITEAD Sonoff Basic
+espurna.menu.BoardModel.sonoffBasic.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_BASIC
+espurna.menu.BoardModel.sonoffRF=ITEAD Sonoff RF
+espurna.menu.BoardModel.sonoffRF.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_RF
+espurna.menu.BoardModel.sonoffTH=ITEAD Sonoff TH
+espurna.menu.BoardModel.sonoffTH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_TH
+espurna.menu.BoardModel.sonoffSV=ITEAD Sonoff SV
+espurna.menu.BoardModel.sonoffSV.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_SV
+espurna.menu.BoardModel.sonoffSlampher=ITEAD Slampher
+espurna.menu.BoardModel.sonoffSlampher.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SLAMPHER
+espurna.menu.BoardModel.sonoffS20=ITEAD S20 Smart Socket
+espurna.menu.BoardModel.sonoffS20.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_S20
+espurna.menu.BoardModel.sonoffPOW=ITEAD Sonoff POW
+espurna.menu.BoardModel.sonoffPOW.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_POW
+espurna.menu.BoardModel.sonoffDual=ITEAD Sonoff Dual
+espurna.menu.BoardModel.sonoffDual.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_DUAL
+espurna.menu.BoardModel.sonoffDualR2=ITEAD Sonoff Dual R2
+espurna.menu.BoardModel.sonoffDualR2.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_DUAL_R2
+espurna.menu.BoardModel.sonoff1CHInching=ITEAD 1CH Inching
+espurna.menu.BoardModel.sonoff1CHInching.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_1CH_INCHING
+espurna.menu.BoardModel.iteadMotor=ITEAD Motor
+espurna.menu.BoardModel.iteadMotor.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_MOTOR
+espurna.menu.BoardModel.sonoffBNSZ01=ITEAD Sonoff BNSZ01
+espurna.menu.BoardModel.sonoffBNSZ01.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_BNSZ01
+espurna.menu.BoardModel.sonoffRFBridge=ITEAD Sonoff RF Bridge
+espurna.menu.BoardModel.sonoffRFBridge.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_RFBRIDGE
+espurna.menu.BoardModel.sonoffLED=ITEAD Sonoff LED
+espurna.menu.BoardModel.sonoffLED.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_LED
+
+espurna.build.board=ESP8266_GENERIC
+espurna.upload.tool=esptool
+espurna.upload.maximum_data_size=81920
+espurna.upload.wait_for_upload_port=true
+espurna.serial.disableDTR=true
+espurna.serial.disableRTS=true
+espurna.build.mcu=esp8266
+espurna.build.core=esp8266
+espurna.build.variant=generic
+espurna.build.spiffs_pagesize=256
+espurna.build.debug_port=
+espurna.build.debug_level=
+espurna.menu.CpuFrequency.80=80 MHz
+espurna.menu.CpuFrequency.80.build.f_cpu=80000000L
+espurna.menu.CpuFrequency.160=160 MHz
+espurna.menu.CpuFrequency.160.build.f_cpu=160000000L
+espurna.menu.ResetMethod.ck=ck
+espurna.menu.ResetMethod.ck.upload.resetmethod=ck
+espurna.menu.ResetMethod.nodemcu=nodemcu
+espurna.menu.ResetMethod.nodemcu.upload.resetmethod=nodemcu
+espurna.menu.ResetMethod.none=none
+espurna.menu.ResetMethod.none.upload.resetmethod=none
+espurna.menu.ResetMethod.dtrset=dtrset
+espurna.menu.ResetMethod.dtrset.upload.resetmethod=dtrset
+# espurna.menu.CrystalFreq.26=26 MHz
+# espurna.menu.CrystalFreq.40=40 MHz
+# espurna.menu.CrystalFreq.40.build.extra_flags=-DF_CRYSTAL=40000000 -DESP8266
+espurna.menu.FlashFreq.40=40MHz
+espurna.menu.FlashFreq.40.build.flash_freq=40
+espurna.menu.FlashFreq.80=80MHz
+espurna.menu.FlashFreq.80.build.flash_freq=80
+espurna.menu.FlashMode.dout=DOUT
+espurna.menu.FlashMode.dout.build.flash_mode=dout
+espurna.menu.FlashMode.qio=QIO
+espurna.menu.FlashMode.qio.build.flash_mode=qio
+espurna.menu.FlashMode.qout=QOUT
+espurna.menu.FlashMode.qout.build.flash_mode=qout
+espurna.menu.FlashMode.dio=DIO
+espurna.menu.FlashMode.dio.build.flash_mode=dio
+espurna.menu.FlashSize.1M0=1M (no SPIFFS)
+espurna.menu.FlashSize.1M0.build.flash_size=1M
+espurna.menu.FlashSize.1M0.build.flash_ld=eagle.flash.1m0.ld
+espurna.menu.FlashSize.1M0.build.spiffs_pagesize=256
+espurna.menu.FlashSize.1M0.upload.maximum_size=1023984
+espurna.menu.FlashSize.1M64=1M (64K SPIFFS)
+espurna.menu.FlashSize.1M64.build.flash_size=1M
+espurna.menu.FlashSize.1M64.build.flash_ld=eagle.flash.1m64.ld
+espurna.menu.FlashSize.1M64.build.spiffs_pagesize=256
+espurna.menu.FlashSize.1M64.upload.maximum_size=958448
+espurna.menu.FlashSize.1M64.build.spiffs_start=0xEB000
+espurna.menu.FlashSize.1M64.build.spiffs_end=0xFB000
+espurna.menu.FlashSize.1M64.build.spiffs_blocksize=4096
+espurna.menu.FlashSize.1M128=1M (128K SPIFFS)
+espurna.menu.FlashSize.1M128.build.flash_size=1M
+espurna.menu.FlashSize.1M128.build.flash_ld=eagle.flash.1m128.ld
+espurna.menu.FlashSize.1M128.build.spiffs_pagesize=256
+espurna.menu.FlashSize.1M128.upload.maximum_size=892912
+espurna.menu.FlashSize.1M128.build.spiffs_start=0xDB000
+espurna.menu.FlashSize.1M128.build.spiffs_end=0xFB000
+espurna.menu.FlashSize.1M128.build.spiffs_blocksize=4096
+espurna.menu.FlashSize.1M144=1M (144K SPIFFS)
+espurna.menu.FlashSize.1M144.build.flash_size=1M
+espurna.menu.FlashSize.1M144.build.flash_ld=eagle.flash.1m144.ld
+espurna.menu.FlashSize.1M144.build.spiffs_pagesize=256
+espurna.menu.FlashSize.1M144.upload.maximum_size=876528
+espurna.menu.FlashSize.1M144.build.spiffs_start=0xD7000
+espurna.menu.FlashSize.1M144.build.spiffs_end=0xFB000
+espurna.menu.FlashSize.1M144.build.spiffs_blocksize=4096
+espurna.menu.FlashSize.1M160=1M (160K SPIFFS)
+espurna.menu.FlashSize.1M160.build.flash_size=1M
+espurna.menu.FlashSize.1M160.build.flash_ld=eagle.flash.1m160.ld
+espurna.menu.FlashSize.1M160.build.spiffs_pagesize=256
+espurna.menu.FlashSize.1M160.upload.maximum_size=860144
+espurna.menu.FlashSize.1M160.build.spiffs_start=0xD3000
+espurna.menu.FlashSize.1M160.build.spiffs_end=0xFB000
+espurna.menu.FlashSize.1M160.build.spiffs_blocksize=4096
+espurna.menu.FlashSize.1M192=1M (192K SPIFFS)
+espurna.menu.FlashSize.1M192.build.flash_size=1M
+espurna.menu.FlashSize.1M192.build.flash_ld=eagle.flash.1m192.ld
+espurna.menu.FlashSize.1M192.build.spiffs_pagesize=256
+espurna.menu.FlashSize.1M192.upload.maximum_size=827376
+espurna.menu.FlashSize.1M192.build.spiffs_start=0xCB000
+espurna.menu.FlashSize.1M192.build.spiffs_end=0xFB000
+espurna.menu.FlashSize.1M192.build.spiffs_blocksize=4096
+espurna.menu.FlashSize.1M256=1M (256K SPIFFS)
+espurna.menu.FlashSize.1M256.build.flash_size=1M
+espurna.menu.FlashSize.1M256.build.flash_ld=eagle.flash.1m256.ld
+espurna.menu.FlashSize.1M256.build.spiffs_pagesize=256
+espurna.menu.FlashSize.1M256.upload.maximum_size=761840
+espurna.menu.FlashSize.1M256.build.spiffs_start=0xBB000
+espurna.menu.FlashSize.1M256.build.spiffs_end=0xFB000
+espurna.menu.FlashSize.1M256.build.spiffs_blocksize=4096
+espurna.menu.FlashSize.1M512=1M (512K SPIFFS)
+espurna.menu.FlashSize.1M512.build.flash_size=1M
+espurna.menu.FlashSize.1M512.build.flash_ld=eagle.flash.1m512.ld
+espurna.menu.FlashSize.1M512.build.spiffs_pagesize=256
+espurna.menu.FlashSize.1M512.upload.maximum_size=499696
+espurna.menu.FlashSize.1M512.build.spiffs_start=0x7B000
+espurna.menu.FlashSize.1M512.build.spiffs_end=0xFB000
+espurna.menu.FlashSize.1M512.build.spiffs_blocksize=8192
+espurna.menu.FlashSize.2M=2M (1M SPIFFS)
+espurna.menu.FlashSize.2M.build.flash_size=2M
+espurna.menu.FlashSize.2M.build.flash_ld=eagle.flash.2m.ld
+espurna.menu.FlashSize.2M.build.spiffs_pagesize=256
+espurna.menu.FlashSize.2M.upload.maximum_size=1044464
+espurna.menu.FlashSize.2M.build.spiffs_start=0x100000
+espurna.menu.FlashSize.2M.build.spiffs_end=0x1FB000
+espurna.menu.FlashSize.2M.build.spiffs_blocksize=8192
+espurna.menu.FlashSize.4M1M=4M (1M SPIFFS)
+espurna.menu.FlashSize.4M1M.build.flash_size=4M
+espurna.menu.FlashSize.4M1M.build.flash_ld=eagle.flash.4m1m.ld
+espurna.menu.FlashSize.4M1M.build.spiffs_pagesize=256
+espurna.menu.FlashSize.4M1M.upload.maximum_size=1044464
+espurna.menu.FlashSize.4M1M.build.spiffs_start=0x300000
+espurna.menu.FlashSize.4M1M.build.spiffs_end=0x3FB000
+espurna.menu.FlashSize.4M1M.build.spiffs_blocksize=8192
+espurna.menu.FlashSize.4M3M=4M (3M SPIFFS)
+espurna.menu.FlashSize.4M3M.build.flash_size=4M
+espurna.menu.FlashSize.4M3M.build.flash_ld=eagle.flash.4m.ld
+espurna.menu.FlashSize.4M3M.build.spiffs_pagesize=256
+espurna.menu.FlashSize.4M3M.upload.maximum_size=1044464
+espurna.menu.FlashSize.4M3M.build.spiffs_start=0x100000
+espurna.menu.FlashSize.4M3M.build.spiffs_end=0x3FB000
+espurna.menu.FlashSize.4M3M.build.spiffs_blocksize=8192
+espurna.menu.FlashSize.8M7M=8M (7M SPIFFS)
+espurna.menu.FlashSize.8M7M.build.flash_size=8M
+espurna.menu.FlashSize.8M7M.build.flash_ld=eagle.flash.8m.ld
+espurna.menu.FlashSize.8M7M.build.spiffs_pagesize=256
+espurna.menu.FlashSize.8M7M.upload.maximum_size=1044464
+espurna.menu.FlashSize.8M7M.build.spiffs_start=0x100000
+espurna.menu.FlashSize.8M7M.build.spiffs_end=0x7FB000
+espurna.menu.FlashSize.8M7M.build.spiffs_blocksize=8192
+espurna.menu.FlashSize.16M15M=16M (15M SPIFFS)
+espurna.menu.FlashSize.16M15M.build.flash_size=16M
+espurna.menu.FlashSize.16M15M.build.flash_ld=eagle.flash.16m.ld
+espurna.menu.FlashSize.16M15M.build.spiffs_pagesize=256
+espurna.menu.FlashSize.16M15M.upload.maximum_size=1044464
+espurna.menu.FlashSize.16M15M.build.spiffs_start=0x100000
+espurna.menu.FlashSize.16M15M.build.spiffs_end=0xFFB000
+espurna.menu.FlashSize.16M15M.build.spiffs_blocksize=8192
+espurna.menu.led.13=13
+espurna.menu.led.13.build.led=-DLED_BUILTIN=13
+espurna.menu.led.0=0
+espurna.menu.led.0.build.led=-DLED_BUILTIN=0
+espurna.menu.led.1=1
+espurna.menu.led.1.build.led=-DLED_BUILTIN=1
+espurna.menu.led.2=2
+espurna.menu.led.2.build.led=-DLED_BUILTIN=2
+espurna.menu.led.3=3
+espurna.menu.led.3.build.led=-DLED_BUILTIN=3
+espurna.menu.led.4=4
+espurna.menu.led.4.build.led=-DLED_BUILTIN=4
+espurna.menu.led.5=5
+espurna.menu.led.5.build.led=-DLED_BUILTIN=5
+espurna.menu.led.6=6
+espurna.menu.led.6.build.led=-DLED_BUILTIN=6
+espurna.menu.led.7=7
+espurna.menu.led.7.build.led=-DLED_BUILTIN=7
+espurna.menu.led.8=8
+espurna.menu.led.8.build.led=-DLED_BUILTIN=8
+espurna.menu.led.9=9
+espurna.menu.led.9.build.led=-DLED_BUILTIN=9
+espurna.menu.led.10=10
+espurna.menu.led.10.build.led=-DLED_BUILTIN=10
+espurna.menu.led.11=11
+espurna.menu.led.11.build.led=-DLED_BUILTIN=11
+espurna.menu.led.12=12
+espurna.menu.led.12.build.led=-DLED_BUILTIN=12
+espurna.menu.led.14=14
+espurna.menu.led.14.build.led=-DLED_BUILTIN=14
+espurna.menu.led.15=15
+espurna.menu.led.15.build.led=-DLED_BUILTIN=15
+espurna.menu.LwIPVariant.v2mss536=v2 Lower Memory
+espurna.menu.LwIPVariant.v2mss536.build.lwip_include=lwip2/include
+espurna.menu.LwIPVariant.v2mss536.build.lwip_lib=-llwip2
+espurna.menu.LwIPVariant.v2mss536.build.lwip_flags=-DLWIP_OPEN_SRC -DTCP_MSS=536
+espurna.menu.LwIPVariant.v2mss1460=v2 Higher Bandwidth
+espurna.menu.LwIPVariant.v2mss1460.build.lwip_include=lwip2/include
+espurna.menu.LwIPVariant.v2mss1460.build.lwip_lib=-llwip2_1460
+espurna.menu.LwIPVariant.v2mss1460.build.lwip_flags=-DLWIP_OPEN_SRC -DTCP_MSS=1460
+espurna.menu.LwIPVariant.Prebuilt=v1.4 Higher Bandwidth
+espurna.menu.LwIPVariant.Prebuilt.build.lwip_lib=-llwip_gcc
+espurna.menu.LwIPVariant.Prebuilt.build.lwip_flags=-DLWIP_OPEN_SRC
+espurna.menu.LwIPVariant.OpenSource=v1.4 Compile from source
+espurna.menu.LwIPVariant.OpenSource.build.lwip_lib=-llwip_src
+espurna.menu.LwIPVariant.OpenSource.build.lwip_flags=-DLWIP_OPEN_SRC
+espurna.menu.LwIPVariant.OpenSource.recipe.hooks.sketch.prebuild.1.pattern=make -C "{runtime.platform.path}/tools/sdk/lwip/src" install TOOLS_PATH="{runtime.tools.xtensa-lx106-elf-gcc.path}/bin/xtensa-lx106-elf-"
+espurna.menu.Debug.Disabled=Disabled
+espurna.menu.Debug.Disabled.build.debug_port=
+espurna.menu.Debug.Serial=Serial
+espurna.menu.Debug.Serial.build.debug_port=-DDEBUG_ESP_PORT=Serial
+espurna.menu.Debug.Serial1=Serial1
+espurna.menu.Debug.Serial1.build.debug_port=-DDEBUG_ESP_PORT=Serial1
+espurna.menu.DebugLevel.None____=None
+espurna.menu.DebugLevel.None____.build.debug_level=
+espurna.menu.DebugLevel.SSL=SSL
+espurna.menu.DebugLevel.SSL.build.debug_level= -DDEBUG_ESP_SSL
+espurna.menu.DebugLevel.TLS_MEM=TLS_MEM
+espurna.menu.DebugLevel.TLS_MEM.build.debug_level= -DDEBUG_ESP_TLS_MEM
+espurna.menu.DebugLevel.HTTP_CLIENT=HTTP_CLIENT
+espurna.menu.DebugLevel.HTTP_CLIENT.build.debug_level= -DDEBUG_ESP_HTTP_CLIENT
+espurna.menu.DebugLevel.HTTP_SERVER=HTTP_SERVER
+espurna.menu.DebugLevel.HTTP_SERVER.build.debug_level= -DDEBUG_ESP_HTTP_SERVER
+espurna.menu.DebugLevel.SSLTLS_MEM=SSL+TLS_MEM
+espurna.menu.DebugLevel.SSLTLS_MEM.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM
+espurna.menu.DebugLevel.SSLHTTP_CLIENT=SSL+HTTP_CLIENT
+espurna.menu.DebugLevel.SSLHTTP_CLIENT.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_HTTP_CLIENT
+espurna.menu.DebugLevel.SSLHTTP_SERVER=SSL+HTTP_SERVER
+espurna.menu.DebugLevel.SSLHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_HTTP_SERVER
+espurna.menu.DebugLevel.TLS_MEMHTTP_CLIENT=TLS_MEM+HTTP_CLIENT
+espurna.menu.DebugLevel.TLS_MEMHTTP_CLIENT.build.debug_level= -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT
+espurna.menu.DebugLevel.TLS_MEMHTTP_SERVER=TLS_MEM+HTTP_SERVER
+espurna.menu.DebugLevel.TLS_MEMHTTP_SERVER.build.debug_level= -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_SERVER
+espurna.menu.DebugLevel.HTTP_CLIENTHTTP_SERVER=HTTP_CLIENT+HTTP_SERVER
+espurna.menu.DebugLevel.HTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+espurna.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENT=SSL+TLS_MEM+HTTP_CLIENT
+espurna.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENT.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT
+espurna.menu.DebugLevel.SSLTLS_MEMHTTP_SERVER=SSL+TLS_MEM+HTTP_SERVER
+espurna.menu.DebugLevel.SSLTLS_MEMHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_SERVER
+espurna.menu.DebugLevel.SSLHTTP_CLIENTHTTP_SERVER=SSL+HTTP_CLIENT+HTTP_SERVER
+espurna.menu.DebugLevel.SSLHTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+espurna.menu.DebugLevel.TLS_MEMHTTP_CLIENTHTTP_SERVER=TLS_MEM+HTTP_CLIENT+HTTP_SERVER
+espurna.menu.DebugLevel.TLS_MEMHTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+espurna.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVER=SSL+TLS_MEM+HTTP_CLIENT+HTTP_SERVER
+espurna.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+espurna.menu.DebugLevel.CORE=CORE
+espurna.menu.DebugLevel.CORE.build.debug_level= -DDEBUG_ESP_CORE
+espurna.menu.DebugLevel.WIFI=WIFI
+espurna.menu.DebugLevel.WIFI.build.debug_level= -DDEBUG_ESP_WIFI
+espurna.menu.DebugLevel.HTTP_UPDATE=HTTP_UPDATE
+espurna.menu.DebugLevel.HTTP_UPDATE.build.debug_level= -DDEBUG_ESP_HTTP_UPDATE
+espurna.menu.DebugLevel.UPDATER=UPDATER
+espurna.menu.DebugLevel.UPDATER.build.debug_level= -DDEBUG_ESP_UPDATER
+espurna.menu.DebugLevel.OTA=OTA
+espurna.menu.DebugLevel.OTA.build.debug_level= -DDEBUG_ESP_OTA
+espurna.menu.DebugLevel.OOM=OOM
+espurna.menu.DebugLevel.OOM.build.debug_level= -DDEBUG_ESP_OOM -include "umm_malloc/umm_malloc_cfg.h"
+espurna.menu.DebugLevel.COREWIFIHTTP_UPDATEUPDATEROTAOOM=CORE+WIFI+HTTP_UPDATE+UPDATER+OTA+OOM
+espurna.menu.DebugLevel.COREWIFIHTTP_UPDATEUPDATEROTAOOM.build.debug_level= -DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_ESP_OOM -include "umm_malloc/umm_malloc_cfg.h"
+espurna.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVERCOREWIFIHTTP_UPDATEUPDATEROTAOOM=SSL+TLS_MEM+HTTP_CLIENT+HTTP_SERVER+CORE+WIFI+HTTP_UPDATE+UPDATER+OTA+OOM
+espurna.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVERCOREWIFIHTTP_UPDATEUPDATEROTAOOM.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER -DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_ESP_OOM -include "umm_malloc/umm_malloc_cfg.h"
+espurna.menu.DebugLevel.NoAssert-NDEBUG=NoAssert-NDEBUG
+espurna.menu.DebugLevel.NoAssert-NDEBUG.build.debug_level= -DNDEBUG
+espurna.menu.UploadSpeed.115200=115200
+espurna.menu.UploadSpeed.115200.upload.speed=115200
+espurna.menu.UploadSpeed.9600=9600
+espurna.menu.UploadSpeed.9600.upload.speed=9600
+espurna.menu.UploadSpeed.57600=57600
+espurna.menu.UploadSpeed.57600.upload.speed=57600
+espurna.menu.UploadSpeed.230400.linux=230400
+espurna.menu.UploadSpeed.230400.macosx=230400
+espurna.menu.UploadSpeed.230400.upload.speed=230400
+espurna.menu.UploadSpeed.256000.windows=256000
+espurna.menu.UploadSpeed.256000.upload.speed=256000
+espurna.menu.UploadSpeed.460800.linux=460800
+espurna.menu.UploadSpeed.460800.macosx=460800
+espurna.menu.UploadSpeed.460800.upload.speed=460800
+espurna.menu.UploadSpeed.512000.windows=512000
+espurna.menu.UploadSpeed.512000.upload.speed=512000
+espurna.menu.UploadSpeed.921600=921600
+espurna.menu.UploadSpeed.921600.upload.speed=921600
+
+
+
+
+
+##############################################################
+espurna85.name=ESPurna for ESP8285 based Modules
+# Sonoff 4CH, Sonoff 4CH Pro, Sonoff Touch, Sonoff B1, Sonoff T1, AI-Thinker Wifi Light
+# These device are believed to be based on esp8285 which only have 1MB of flash
+# thus build.board=ESP8266_ESP01
+espurna85.menu.BoardModel.sonoff4CH=ITEAD Sonoff 4CH
+espurna85.menu.BoardModel.sonoff4CH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_4CH
+espurna85.menu.BoardModel.sonoff4CHPro=ITEAD Sonoff 4CH Pro
+espurna85.menu.BoardModel.sonoff4CHPro.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_4CH_PRO
+espurna85.menu.BoardModel.sonoffTouch=ITEAD Sonoff Touch
+espurna85.menu.BoardModel.sonoffTouch.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_TOUCH
+espurna85.menu.BoardModel.sonoffB1=ITEAD Sonoff B1
+espurna85.menu.BoardModel.sonoffB1.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_B1
+espurna85.menu.BoardModel.sonoffT11CH=ITEAD Sonoff T1 1CH
+espurna85.menu.BoardModel.sonoffT11CH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_T1_1CH
+espurna85.menu.BoardModel.sonoffT12CH=ITEAD Sonoff T1 2CH
+espurna85.menu.BoardModel.sonoffT12CH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_T1_2CH
+espurna85.menu.BoardModel.sonoffT13CH=ITEAD Sonoff T1 3CH
+espurna85.menu.BoardModel.sonoffT13CH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_T1_3CH
+espurna85.menu.BoardModel.AIThinkerWifiLight=AI-Thinker Wifi Light
+espurna85.menu.BoardModel.AIThinkerWifiLight.build.extra_flags=-DESP8266 -DAITHINKER_AI_LIGHT
+
+espurna85.build.board=ESP8266_ESP01
+espurna85.upload.tool=esptool
+espurna85.upload.maximum_data_size=81920
+espurna85.upload.wait_for_upload_port=true
+espurna85.serial.disableDTR=true
+espurna85.serial.disableRTS=true
+espurna85.build.mcu=esp8266
+espurna85.build.core=esp8266
+espurna85.build.variant=generic
+espurna85.build.spiffs_pagesize=256
+espurna85.build.debug_port=
+espurna85.build.debug_level=
+espurna85.menu.CpuFrequency.80=80 MHz
+espurna85.menu.CpuFrequency.80.build.f_cpu=80000000L
+espurna85.menu.CpuFrequency.160=160 MHz
+espurna85.menu.CpuFrequency.160.build.f_cpu=160000000L
+espurna85.menu.ResetMethod.ck=ck
+espurna85.menu.ResetMethod.ck.upload.resetmethod=ck
+espurna85.menu.ResetMethod.nodemcu=nodemcu
+espurna85.menu.ResetMethod.nodemcu.upload.resetmethod=nodemcu
+espurna85.menu.ResetMethod.none=none
+espurna85.menu.ResetMethod.none.upload.resetmethod=none
+espurna85.menu.ResetMethod.dtrset=dtrset
+espurna85.menu.ResetMethod.dtrset.upload.resetmethod=dtrset
+# espurna85.menu.CrystalFreq.26=26 MHz
+# espurna85.menu.CrystalFreq.40=40 MHz
+# espurna85.menu.CrystalFreq.40.build.extra_flags=-DF_CRYSTAL=40000000 -DESP8266
+espurna85.build.flash_mode=dout
+espurna85.build.flash_freq=40
+espurna85.build.flash_size=1M
+espurna85.build.flash_ld=eagle.flash.1m0.ld
+espurna85.build.spiffs_pagesize=256
+espurna85.upload.maximum_size=1023984
+espurna85.menu.led.13=13
+espurna85.menu.led.13.build.led=-DLED_BUILTIN=13
+espurna85.menu.led.0=0
+espurna85.menu.led.0.build.led=-DLED_BUILTIN=0
+espurna85.menu.led.1=1
+espurna85.menu.led.1.build.led=-DLED_BUILTIN=1
+espurna85.menu.led.2=2
+espurna85.menu.led.2.build.led=-DLED_BUILTIN=2
+espurna85.menu.led.3=3
+espurna85.menu.led.3.build.led=-DLED_BUILTIN=3
+espurna85.menu.led.4=4
+espurna85.menu.led.4.build.led=-DLED_BUILTIN=4
+espurna85.menu.led.5=5
+espurna85.menu.led.5.build.led=-DLED_BUILTIN=5
+espurna85.menu.led.6=6
+espurna85.menu.led.6.build.led=-DLED_BUILTIN=6
+espurna85.menu.led.7=7
+espurna85.menu.led.7.build.led=-DLED_BUILTIN=7
+espurna85.menu.led.8=8
+espurna85.menu.led.8.build.led=-DLED_BUILTIN=8
+espurna85.menu.led.9=9
+espurna85.menu.led.9.build.led=-DLED_BUILTIN=9
+espurna85.menu.led.10=10
+espurna85.menu.led.10.build.led=-DLED_BUILTIN=10
+espurna85.menu.led.11=11
+espurna85.menu.led.11.build.led=-DLED_BUILTIN=11
+espurna85.menu.led.12=12
+espurna85.menu.led.12.build.led=-DLED_BUILTIN=12
+espurna85.menu.led.14=14
+espurna85.menu.led.14.build.led=-DLED_BUILTIN=14
+espurna85.menu.led.15=15
+espurna85.menu.led.15.build.led=-DLED_BUILTIN=15
+espurna85.menu.LwIPVariant.v2mss536=v2 Lower Memory
+espurna85.menu.LwIPVariant.v2mss536.build.lwip_include=lwip2/include
+espurna85.menu.LwIPVariant.v2mss536.build.lwip_lib=-llwip2
+espurna85.menu.LwIPVariant.v2mss536.build.lwip_flags=-DLWIP_OPEN_SRC -DTCP_MSS=536
+espurna85.menu.LwIPVariant.v2mss1460=v2 Higher Bandwidth
+espurna85.menu.LwIPVariant.v2mss1460.build.lwip_include=lwip2/include
+espurna85.menu.LwIPVariant.v2mss1460.build.lwip_lib=-llwip2_1460
+espurna85.menu.LwIPVariant.v2mss1460.build.lwip_flags=-DLWIP_OPEN_SRC -DTCP_MSS=1460
+espurna85.menu.LwIPVariant.Prebuilt=v1.4 Higher Bandwidth
+espurna85.menu.LwIPVariant.Prebuilt.build.lwip_lib=-llwip_gcc
+espurna85.menu.LwIPVariant.Prebuilt.build.lwip_flags=-DLWIP_OPEN_SRC
+espurna85.menu.LwIPVariant.OpenSource=v1.4 Compile from source
+espurna85.menu.LwIPVariant.OpenSource.build.lwip_lib=-llwip_src
+espurna85.menu.LwIPVariant.OpenSource.build.lwip_flags=-DLWIP_OPEN_SRC
+espurna85.menu.LwIPVariant.OpenSource.recipe.hooks.sketch.prebuild.1.pattern=make -C "{runtime.platform.path}/tools/sdk/lwip/src" install TOOLS_PATH="{runtime.tools.xtensa-lx106-elf-gcc.path}/bin/xtensa-lx106-elf-"
+espurna85.menu.Debug.Disabled=Disabled
+espurna85.menu.Debug.Disabled.build.debug_port=
+espurna85.menu.Debug.Serial=Serial
+espurna85.menu.Debug.Serial.build.debug_port=-DDEBUG_ESP_PORT=Serial
+espurna85.menu.Debug.Serial1=Serial1
+espurna85.menu.Debug.Serial1.build.debug_port=-DDEBUG_ESP_PORT=Serial1
+espurna85.menu.DebugLevel.None____=None
+espurna85.menu.DebugLevel.None____.build.debug_level=
+espurna85.menu.DebugLevel.SSL=SSL
+espurna85.menu.DebugLevel.SSL.build.debug_level= -DDEBUG_ESP_SSL
+espurna85.menu.DebugLevel.TLS_MEM=TLS_MEM
+espurna85.menu.DebugLevel.TLS_MEM.build.debug_level= -DDEBUG_ESP_TLS_MEM
+espurna85.menu.DebugLevel.HTTP_CLIENT=HTTP_CLIENT
+espurna85.menu.DebugLevel.HTTP_CLIENT.build.debug_level= -DDEBUG_ESP_HTTP_CLIENT
+espurna85.menu.DebugLevel.HTTP_SERVER=HTTP_SERVER
+espurna85.menu.DebugLevel.HTTP_SERVER.build.debug_level= -DDEBUG_ESP_HTTP_SERVER
+espurna85.menu.DebugLevel.SSLTLS_MEM=SSL+TLS_MEM
+espurna85.menu.DebugLevel.SSLTLS_MEM.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM
+espurna85.menu.DebugLevel.SSLHTTP_CLIENT=SSL+HTTP_CLIENT
+espurna85.menu.DebugLevel.SSLHTTP_CLIENT.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_HTTP_CLIENT
+espurna85.menu.DebugLevel.SSLHTTP_SERVER=SSL+HTTP_SERVER
+espurna85.menu.DebugLevel.SSLHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_HTTP_SERVER
+espurna85.menu.DebugLevel.TLS_MEMHTTP_CLIENT=TLS_MEM+HTTP_CLIENT
+espurna85.menu.DebugLevel.TLS_MEMHTTP_CLIENT.build.debug_level= -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT
+espurna85.menu.DebugLevel.TLS_MEMHTTP_SERVER=TLS_MEM+HTTP_SERVER
+espurna85.menu.DebugLevel.TLS_MEMHTTP_SERVER.build.debug_level= -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_SERVER
+espurna85.menu.DebugLevel.HTTP_CLIENTHTTP_SERVER=HTTP_CLIENT+HTTP_SERVER
+espurna85.menu.DebugLevel.HTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+espurna85.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENT=SSL+TLS_MEM+HTTP_CLIENT
+espurna85.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENT.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT
+espurna85.menu.DebugLevel.SSLTLS_MEMHTTP_SERVER=SSL+TLS_MEM+HTTP_SERVER
+espurna85.menu.DebugLevel.SSLTLS_MEMHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_SERVER
+espurna85.menu.DebugLevel.SSLHTTP_CLIENTHTTP_SERVER=SSL+HTTP_CLIENT+HTTP_SERVER
+espurna85.menu.DebugLevel.SSLHTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+espurna85.menu.DebugLevel.TLS_MEMHTTP_CLIENTHTTP_SERVER=TLS_MEM+HTTP_CLIENT+HTTP_SERVER
+espurna85.menu.DebugLevel.TLS_MEMHTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+espurna85.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVER=SSL+TLS_MEM+HTTP_CLIENT+HTTP_SERVER
+espurna85.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+espurna85.menu.DebugLevel.CORE=CORE
+espurna85.menu.DebugLevel.CORE.build.debug_level= -DDEBUG_ESP_CORE
+espurna85.menu.DebugLevel.WIFI=WIFI
+espurna85.menu.DebugLevel.WIFI.build.debug_level= -DDEBUG_ESP_WIFI
+espurna85.menu.DebugLevel.HTTP_UPDATE=HTTP_UPDATE
+espurna85.menu.DebugLevel.HTTP_UPDATE.build.debug_level= -DDEBUG_ESP_HTTP_UPDATE
+espurna85.menu.DebugLevel.UPDATER=UPDATER
+espurna85.menu.DebugLevel.UPDATER.build.debug_level= -DDEBUG_ESP_UPDATER
+espurna85.menu.DebugLevel.OTA=OTA
+espurna85.menu.DebugLevel.OTA.build.debug_level= -DDEBUG_ESP_OTA
+espurna85.menu.DebugLevel.OOM=OOM
+espurna85.menu.DebugLevel.OOM.build.debug_level= -DDEBUG_ESP_OOM -include "umm_malloc/umm_malloc_cfg.h"
+espurna85.menu.DebugLevel.COREWIFIHTTP_UPDATEUPDATEROTAOOM=CORE+WIFI+HTTP_UPDATE+UPDATER+OTA+OOM
+espurna85.menu.DebugLevel.COREWIFIHTTP_UPDATEUPDATEROTAOOM.build.debug_level= -DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_ESP_OOM -include "umm_malloc/umm_malloc_cfg.h"
+espurna85.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVERCOREWIFIHTTP_UPDATEUPDATEROTAOOM=SSL+TLS_MEM+HTTP_CLIENT+HTTP_SERVER+CORE+WIFI+HTTP_UPDATE+UPDATER+OTA+OOM
+espurna85.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVERCOREWIFIHTTP_UPDATEUPDATEROTAOOM.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER -DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_ESP_OOM -include "umm_malloc/umm_malloc_cfg.h"
+espurna85.menu.DebugLevel.NoAssert-NDEBUG=NoAssert-NDEBUG
+espurna85.menu.DebugLevel.NoAssert-NDEBUG.build.debug_level= -DNDEBUG
+espurna85.menu.UploadSpeed.115200=115200
+espurna85.menu.UploadSpeed.115200.upload.speed=115200
+espurna85.menu.UploadSpeed.9600=9600
+espurna85.menu.UploadSpeed.9600.upload.speed=9600
+espurna85.menu.UploadSpeed.57600=57600
+espurna85.menu.UploadSpeed.57600.upload.speed=57600
+espurna85.menu.UploadSpeed.230400.linux=230400
+espurna85.menu.UploadSpeed.230400.macosx=230400
+espurna85.menu.UploadSpeed.230400.upload.speed=230400
+espurna85.menu.UploadSpeed.256000.windows=256000
+espurna85.menu.UploadSpeed.256000.upload.speed=256000
+espurna85.menu.UploadSpeed.460800.linux=460800
+espurna85.menu.UploadSpeed.460800.macosx=460800
+espurna85.menu.UploadSpeed.460800.upload.speed=460800
+espurna85.menu.UploadSpeed.512000.windows=512000
+espurna85.menu.UploadSpeed.512000.upload.speed=512000
+espurna85.menu.UploadSpeed.921600=921600
+espurna85.menu.UploadSpeed.921600.upload.speed=921600
