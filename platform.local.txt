@@ -29,6 +29,6 @@ build.espurna_flags=
 build.my_project_name=
 #-D{build.project_name}
 #
-compiler.c.extra_flags=-include "/home/mhightow/Arduino/include/global.h" {build.espurna_flags} {build.my_project_flags} {build.my_project_name}
+compiler.c.extra_flags=-include "/home/<your userID here>/Arduino/include/global.h" {build.espurna_flags} {build.my_project_flags} {build.my_project_name}
 compiler.S.extra_flags=-include  {build.espurna_flags} {build.my_project_flags}
-compiler.cpp.extra_flags=-include "/home/mhightow/Arduino/include/global.h" {build.espurna_flags} {build.my_project_flags} {build.my_project_name}
+compiler.cpp.extra_flags=-include "/home/<your userID here>/Arduino/include/global.h" {build.espurna_flags} {build.my_project_flags} {build.my_project_name}
