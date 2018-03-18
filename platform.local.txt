@@ -27,8 +27,7 @@ build.espurna_flags=
 #
 # nothing seems to work - problem is I need to remove the .ino from the string.
 build.my_project_name=
-#-D{build.project_name}
-#
-compiler.c.extra_flags=-include "/home/<your userID here>/Arduino/include/global.h" {build.espurna_flags} {build.my_project_flags} {build.my_project_name}
-compiler.S.extra_flags=-include  {build.espurna_flags} {build.my_project_flags}
-compiler.cpp.extra_flags=-include "/home/<your userID here>/Arduino/include/global.h" {build.espurna_flags} {build.my_project_flags} {build.my_project_name}
+# note, {build.project_name} has .ino extension :(
+compiler.c.extra_flags=-include "C:\Users\mhightow\Documents\Arduino\include\_global.h" {build.espurna_flags} {build.my_project_flags} {build.my_project_name}
+compiler.S.extra_flags=-include  {build.espurna_flags} {build.my_project_flags} {build.my_project_name}
+compiler.cpp.extra_flags=-include "C:\Users\mhightow\Documents\Arduino\include\_global.h" {build.espurna_flags} {build.my_project_flags} {build.my_project_name}
