@@ -7,6 +7,7 @@ sonoff.pid.0=0x6001
 
 sonoff.menu.UploadSpeed.230400.linux=230400
 
+# Define some new menu items
 menu.my_project_flags=Project Build Flags
 menu.espurna_flags=ESPurna Build Flags
 
@@ -15,7 +16,7 @@ espurna.menu.espurna_flags.i2cSupport=I2C Support
 espurna.menu.espurna_flags.i2cSupport.build.espurna_flags=-DI2C_SUPPORT=1
 espurna.menu.espurna_flags.dallasSupport=Dallas Support
 espurna.menu.espurna_flags.dallasSupport.build.espurna_flags=-DDALLAS_SUPPORT=1
-espurna.menu.espurna_flags.dhtSupport=DHT Support# Added this so I can tell one build from the other
+espurna.menu.espurna_flags.dhtSupport=DHT Support
 espurna.menu.espurna_flags.dhtSupport.build.espurna_flags=-DDHT_SUPPORT=1
 espurna.menu.espurna_flags.hlw9012Support=HLW9012 Support
 espurna.menu.espurna_flags.hlw9012Support.build.espurna_flags=-DHLW8012_SUPPORT=1
@@ -36,7 +37,9 @@ sonoff.menu.my_project_flags.nameresolv1.build.my_project_flags=-DLLMNR_SUPPORT
 sonoff.menu.my_project_flags.nameresolv2=NetBIOS Support
 sonoff.menu.my_project_flags.nameresolv2.build.my_project_flags=-DNETBIOS_SUPPORT
 
+
 ##############################################################
+# Define some ITEAD Sonoff devices I often use.
 sonoff.name=ITEAD Sonoff
 sonoff.menu.BoardModel.sonoffBasicIR=ITEAD Sonoff Basic - IRremote
 sonoff.menu.BoardModel.sonoffBasicIR.build.board=SONOFF_BASIC
@@ -286,36 +289,43 @@ sonoff.menu.UploadSpeed.512000.upload.speed=512000
 sonoff.menu.UploadSpeed.921600=921600
 sonoff.menu.UploadSpeed.921600.upload.speed=921600
 
+
 ##############################################################
+# Define espurna board so we can get more control over its build properties.
+# Use BoardModel to identify a specific boards
+#
 espurna.name=ESPurna for ESP8266 based Modules
 espurna.menu.BoardModel.sonoffBasic=ITEAD Sonoff Basic
-espurna.menu.BoardModel.sonoffBasic.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_BASIC
+espurna.menu.BoardModel.sonoffBasic.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_BASIC
 espurna.menu.BoardModel.sonoffRF=ITEAD Sonoff RF
-espurna.menu.BoardModel.sonoffRF.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_RF
+espurna.menu.BoardModel.sonoffRF.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_RF
 espurna.menu.BoardModel.sonoffTH=ITEAD Sonoff TH
-espurna.menu.BoardModel.sonoffTH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_TH
+espurna.menu.BoardModel.sonoffTH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_TH
 espurna.menu.BoardModel.sonoffSV=ITEAD Sonoff SV
-espurna.menu.BoardModel.sonoffSV.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_SV
+espurna.menu.BoardModel.sonoffSV.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_SV
 espurna.menu.BoardModel.sonoffSlampher=ITEAD Slampher
-espurna.menu.BoardModel.sonoffSlampher.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SLAMPHER
+espurna.menu.BoardModel.sonoffSlampher.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SLAMPHER
 espurna.menu.BoardModel.sonoffS20=ITEAD S20 Smart Socket
-espurna.menu.BoardModel.sonoffS20.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_S20
+espurna.menu.BoardModel.sonoffS20.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_S20
 espurna.menu.BoardModel.sonoffPOW=ITEAD Sonoff POW
-espurna.menu.BoardModel.sonoffPOW.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_POW
+espurna.menu.BoardModel.sonoffPOW.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_POW
 espurna.menu.BoardModel.sonoffDual=ITEAD Sonoff Dual
-espurna.menu.BoardModel.sonoffDual.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_DUAL
+espurna.menu.BoardModel.sonoffDual.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_DUAL
 espurna.menu.BoardModel.sonoffDualR2=ITEAD Sonoff Dual R2
-espurna.menu.BoardModel.sonoffDualR2.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_DUAL_R2
+espurna.menu.BoardModel.sonoffDualR2.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_DUAL_R2
 espurna.menu.BoardModel.sonoff1CHInching=ITEAD 1CH Inching
-espurna.menu.BoardModel.sonoff1CHInching.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_1CH_INCHING
+espurna.menu.BoardModel.sonoff1CHInching.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_1CH_INCHING
 espurna.menu.BoardModel.iteadMotor=ITEAD Motor
-espurna.menu.BoardModel.iteadMotor.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_MOTOR
+espurna.menu.BoardModel.iteadMotor.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_MOTOR
 espurna.menu.BoardModel.sonoffBNSZ01=ITEAD Sonoff BNSZ01
-espurna.menu.BoardModel.sonoffBNSZ01.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_BNSZ01
+espurna.menu.BoardModel.sonoffBNSZ01.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_BNSZ01
 espurna.menu.BoardModel.sonoffRFBridge=ITEAD Sonoff RF Bridge
-espurna.menu.BoardModel.sonoffRFBridge.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_RFBRIDGE
+espurna.menu.BoardModel.sonoffRFBridge.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_RFBRIDGE
 espurna.menu.BoardModel.sonoffLED=ITEAD Sonoff LED
-espurna.menu.BoardModel.sonoffLED.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_LED
+espurna.menu.BoardModel.sonoffLED.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_LED
+espurna.menu.BoardModel.kmcSmartPlug=KMC WiFi Smart Plug (70011)
+espurna.menu.BoardModel.kmcSmartPlug.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DKMC_70011
+
 
 espurna.build.board=ESP8266_GENERIC
 espurna.upload.tool=esptool
@@ -580,28 +590,25 @@ espurna.menu.UploadSpeed.921600=921600
 espurna.menu.UploadSpeed.921600.upload.speed=921600
 
 
-
-
-
 ##############################################################
 espurna85.name=ESPurna for ESP8285 based Modules
 # Sonoff 4CH, Sonoff 4CH Pro, Sonoff Touch, Sonoff B1, Sonoff T1, AI-Thinker Wifi Light
 # These device are believed to be based on esp8285 which only have 1MB of flash
 # thus build.board=ESP8266_ESP01
 espurna85.menu.BoardModel.sonoff4CH=ITEAD Sonoff 4CH
-espurna85.menu.BoardModel.sonoff4CH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_4CH
+espurna85.menu.BoardModel.sonoff4CH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_4CH
 espurna85.menu.BoardModel.sonoff4CHPro=ITEAD Sonoff 4CH Pro
-espurna85.menu.BoardModel.sonoff4CHPro.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_4CH_PRO
+espurna85.menu.BoardModel.sonoff4CHPro.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_4CH_PRO
 espurna85.menu.BoardModel.sonoffTouch=ITEAD Sonoff Touch
-espurna85.menu.BoardModel.sonoffTouch.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_TOUCH
+espurna85.menu.BoardModel.sonoffTouch.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_TOUCH
 espurna85.menu.BoardModel.sonoffB1=ITEAD Sonoff B1
-espurna85.menu.BoardModel.sonoffB1.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_B1
+espurna85.menu.BoardModel.sonoffB1.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_B1
 espurna85.menu.BoardModel.sonoffT11CH=ITEAD Sonoff T1 1CH
-espurna85.menu.BoardModel.sonoffT11CH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_T1_1CH
+espurna85.menu.BoardModel.sonoffT11CH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_T1_1CH
 espurna85.menu.BoardModel.sonoffT12CH=ITEAD Sonoff T1 2CH
-espurna85.menu.BoardModel.sonoffT12CH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_T1_2CH
+espurna85.menu.BoardModel.sonoffT12CH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_T1_2CH
 espurna85.menu.BoardModel.sonoffT13CH=ITEAD Sonoff T1 3CH
-espurna85.menu.BoardModel.sonoffT13CH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DITEAD_SONOFF_T1_3CH
+espurna85.menu.BoardModel.sonoffT13CH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_T1_3CH
 espurna85.menu.BoardModel.AIThinkerWifiLight=AI-Thinker Wifi Light
 espurna85.menu.BoardModel.AIThinkerWifiLight.build.extra_flags=-DESP8266 -DAITHINKER_AI_LIGHT
 
