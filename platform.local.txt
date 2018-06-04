@@ -31,7 +31,7 @@ build.my_project_name=
 # I wanted to use the Arduino IDE's Project Name to fill out this; however, 
 # {build.project_name} has a .ino extension. I see no way to remove it.
 
-compiler.c.extra_flags=-include "C:\Users\mhightow\Documents\Arduino\include\_global.h" {build.espurna_flags} {build.my_project_flags} {build.espurna_ha_flags} {build.my_project_name}
+compiler.c.extra_flags=-include "C:\Users\mhightower83\Documents\Arduino\include\_global.h" {build.espurna_flags} {build.my_project_flags} {build.espurna_ha_flags} {build.my_project_name}
 compiler.S.extra_flags=-include  {build.espurna_flags} {build.my_project_flags} {build.espurna_ha_flags} {build.my_project_name}
-compiler.cpp.extra_flags=-include "C:\Users\mhightow\Documents\Arduino\include\_global.h" {build.espurna_flags} {build.my_project_flags} {build.espurna_ha_flags} {build.my_project_name}
+compiler.cpp.extra_flags=-include "C:\Users\mhightower83\Documents\Arduino\include\_global.h" {build.espurna_flags} {build.my_project_flags} {build.espurna_ha_flags} {build.my_project_name}
 
