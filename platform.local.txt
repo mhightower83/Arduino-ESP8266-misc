@@ -18,16 +18,20 @@
 # Added these to boards.local.txt
 build.my_project_flags=
 build.espurna_flags=
+build.espurna_ha_flags=
 
 # By adding a global.h here, we can have all libraries reference a common
 # include. This include can have a symbolic link into our project folders
-# assuming you use the common duplicate include exclusion techniques.
+# assuming you use the usual duplicate include exclusion techniques.
 # Note, changes to global.h will effect all builds/sketches.
 # employ sketch conditionals in global.h for finer control.
 #
-# nothing seems to work - problem is I need to remove the .ino from the string.
+
 build.my_project_name=
-# note, {build.project_name} has .ino extension :(
-compiler.c.extra_flags=-include "C:\Users\mhightow\Documents\Arduino\include\_global.h" {build.espurna_flags} {build.my_project_flags} {build.my_project_name}
-compiler.S.extra_flags=-include  {build.espurna_flags} {build.my_project_flags} {build.my_project_name}
-compiler.cpp.extra_flags=-include "C:\Users\mhightow\Documents\Arduino\include\_global.h" {build.espurna_flags} {build.my_project_flags} {build.my_project_name}
+# I wanted to use the Arduino IDE's Project Name to fill out this; however, 
+# {build.project_name} has a .ino extension. I see no way to remove it.
+
+compiler.c.extra_flags=-include "C:\Users\mhightow\Documents\Arduino\include\_global.h" {build.espurna_flags} {build.my_project_flags} {build.espurna_ha_flags} {build.my_project_name}
+compiler.S.extra_flags=-include  {build.espurna_flags} {build.my_project_flags} {build.espurna_ha_flags} {build.my_project_name}
+compiler.cpp.extra_flags=-include "C:\Users\mhightow\Documents\Arduino\include\_global.h" {build.espurna_flags} {build.my_project_flags} {build.espurna_ha_flags} {build.my_project_name}
+
