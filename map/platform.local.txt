@@ -12,10 +12,12 @@
 # compiler.elf2hex.extra_flags=
 
 # This will get us a summary report of sizes on some interesting sections
-# It will show in the IDE build window, when verbose setting is checked.
-compiler.elf2iramsize.cmd=xtensa-lx106-elf-objdump
-compiler.elf2iramsize.flags=-h -w --section=.text --section=.irom0.text --section=.data --section=.bss --section=.rodata
-recipe.hooks.linking.postlink.1.pattern="{compiler.path}{compiler.elf2iramsize.cmd}" {compiler.elf2iramsize.flags} "{build.path}/{build.project_name}.elf"
+# the results are shown in the IDE build window, when verbose setting is checked.
+tools.elfsum.cmd=xtensa-lx106-elf-objdump
+tools.elfsum.path={compiler.path}
+tools.elfsum.flags=-h -w --section=.text --section=.irom0.text --section=.data --section=.bss --section=.rodata
+tools.elfsum.extra_flags=
+recipe.hooks.linking.postlink.1.pattern="{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}/{build.project_name}.elf"
 
 #
 # This will give us a map file in the build directory

@@ -19,31 +19,27 @@
 build.my_project_flags=
 build.espurna_flags=
 build.espurna_ha_flags=
-
 build.my_project_name=
-# I wanted to use the Arduino IDE's Project Name to fill out this; however,
-# {build.project_name} has a .ino extension. I see no way to remove it.
 
-# The Arduino IDE lacks a covenant way to set build defines for a project.
+
 #
-# This is a work around for that. It requires requires two .h files be
-# available for every build. An ide_global.h file, common for all sketches. It
-# can be empty just needs to exist. Second file, global.h, must exist in
-# every sketch. It too can be empty.
+#                Attention!
 #
-# Additions to either of these files can be seen by core and library modules.
-# By adding sketch specific defines to sketch/global.h, a library can see those
-# definitions and be built with options specific to a sketchs requirements.
-#
-# Additions of defines to ide_global.h, will effect all modules built.
-#
-# Sigh, I could not find a built-in variable for the Arduino sketch directory path
+recipe.hooks.prebuild.01.pattern=echo You need to edit "platform.local.txt" and replace "YourUserId with your user id."
+# Delete the above line and edit below. Replace YourUserId with a value that
+# will result in custom.globalh.path pointing to your Arduino/include directory.
+# If you are not using default file locations, make other updates as need.
+
+
 custom.userid=YourUserId
+
+
+
+
 custom.global.path=/home/{custom.userid}/Arduino/include
 custom.global.path.windows=C:\Users\{custom.userid}\Documents\Arduino\include
 custom.gnutool.path=/bin
-# On Windows it is assumed you have git installed
-# For Windows system use the the git version of popular GNU tools
+# On Windows I assumed GIT is installed.
 custom.gnutool.path.windows=C:\Program Files\Git\usr\bin
 
 compiler.c.extra_flags=-include "{custom.global.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
@@ -51,17 +47,18 @@ compiler.S.extra_flags=-include "{custom.global.path}/ide_global.h" -include "{b
 compiler.cpp.extra_flags=-include "{custom.global.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
 
 # Copy a sketch/global.h template file into the build tree if it is missing.
-# This file is a default, if you have one in your sketch source directory, the
-# Arduino IDE build process will overwrite this default.
+# This file is a default. If you have one in your sketch's source directory,
+# the Arduino IDE build process will replace the default.
 recipe.hooks.prebuild.01.pattern="{custom.gnutool.path}/mkdir" -p "{build.path}/sketch"
 recipe.hooks.prebuild.02.pattern="{custom.gnutool.path}/cp" -n --preserve=timestamps "{custom.global.path}/global.h" "{build.path}/sketch/global.h"
 
 # This will get us a summary report of sizes on some interesting sections
-# It will show in the IDE build window, when verbose setting is checked.
-compiler.elf2iramsize.cmd=xtensa-lx106-elf-objdump
-compiler.elf2iramsize.flags=-h -w --section=.text --section=.irom0.text --section=.data --section=.bss --section=.rodata
-compiler.elf2iramsize.extra_flags=
-recipe.hooks.linking.postlink.1.pattern="{compiler.path}{compiler.elf2iramsize.cmd}" {compiler.elf2iramsize.flags} {compiler.elf2iramsize.extra_flags} "{build.path}/{build.project_name}.elf"
+# the results are shown in the IDE build window, when verbose setting is checked.
+tools.elfsum.cmd=xtensa-lx106-elf-objdump
+tools.elfsum.path={compiler.path}
+tools.elfsum.flags=-h -w --section=.text --section=.irom0.text --section=.data --section=.bss --section=.rodata
+tools.elfsum.extra_flags=
+recipe.hooks.linking.postlink.1.pattern="{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}/{build.project_name}.elf"
 
 #
 # This will give us a map file in the build directory

@@ -12,23 +12,30 @@
 # compiler.elf2hex.extra_flags=
 
 #
-# Add includes to give build access to ide_global.h and sketch/global.h files.
+#                Attention!
 #
-# Sigh, I could not find a build in variable for the Arduino sketch directory path
+recipe.hooks.prebuild.01.pattern=echo You need to edit "platform.local.txt" and replace "YourUserId with your user id."
+# Delete the above line and edit below. Replace YourUserId with a value that
+# will result in custom.globalh.path pointing to your Arduino/include directory.
+# If you are not using default file locations, make other updates as need.
+
+
 custom.userid=YourUserId
-custom.global.path=/home/{custom.userid}/Arduino/include
-custom.global.path.windows=C:\Users\{custom.userid}\Documents\Arduino\include
+
+
+
+custom.globalh.path=/home/{custom.userid}/Arduino/include
+custom.globalh.path.windows=C:\Users\{custom.userid}\Documents\Arduino\include
 custom.gnutool.path=/bin
-# On Windows it is assumed you have git installed
-# For Windows system use the the git version of popular GNU tools
+# On Windows I assumed GIT is installed.
 custom.gnutool.path.windows=C:\Program Files\Git\usr\bin
 
-compiler.c.extra_flags=-include "{custom.global.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
-compiler.S.extra_flags=-include "{custom.global.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
-compiler.cpp.extra_flags=-include "{custom.global.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
+compiler.c.extra_flags=-include "{custom.globalh.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
+compiler.S.extra_flags=-include "{custom.globalh.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
+compiler.cpp.extra_flags=-include "{custom.globalh.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
 
 # Copy a sketch/global.h template file into the build tree if it is missing.
-# This file is a default, if you have one in your sketch source directory, the
-# Arduino IDE build process will overwrite this default.
-recipe.hooks.prebuild.01.pattern="{custom.gnutool.path}/mkdir" -p "{build.path}/sketch"
-recipe.hooks.prebuild.02.pattern="{custom.gnutool.path}/cp" -n --preserve=timestamps "{custom.global.path}/global.h" "{build.path}/sketch/global.h"
+# This file is a default. If you have one in your sketch's source directory,
+# the Arduino IDE build process will replace the default.
+recipe.hooks.prebuild.02.pattern="{custom.gnutool.path}/mkdir" -p "{build.path}/sketch"
+recipe.hooks.prebuild.03.pattern="{custom.gnutool.path}/cp" -n --preserve=timestamps "{custom.global.path}/global.h" "{build.path}/sketch/global.h"
