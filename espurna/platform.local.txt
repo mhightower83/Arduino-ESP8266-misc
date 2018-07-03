@@ -35,22 +35,21 @@ custom.userid=YourUserId
 
 
 
-
-custom.global.path=/home/{custom.userid}/Arduino/include
-custom.global.path.windows=C:\Users\{custom.userid}\Documents\Arduino\include
+custom.globalh.path=/home/{custom.userid}/Arduino/include
+custom.globalh.path.windows=C:\Users\{custom.userid}\Documents\Arduino\include
 custom.gnutool.path=/bin
 # On Windows I assumed GIT is installed.
 custom.gnutool.path.windows=C:\Program Files\Git\usr\bin
 
-compiler.c.extra_flags=-include "{custom.global.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
-compiler.S.extra_flags=-include "{custom.global.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
-compiler.cpp.extra_flags=-include "{custom.global.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
+compiler.c.extra_flags=-include "{custom.globalh.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
+compiler.S.extra_flags=-include "{custom.globalh.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
+compiler.cpp.extra_flags=-include "{custom.globalh.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
 
 # Copy a sketch/global.h template file into the build tree if it is missing.
 # This file is a default. If you have one in your sketch's source directory,
 # the Arduino IDE build process will replace the default.
-recipe.hooks.prebuild.01.pattern="{custom.gnutool.path}/mkdir" -p "{build.path}/sketch"
-recipe.hooks.prebuild.02.pattern="{custom.gnutool.path}/cp" -n --preserve=timestamps "{custom.global.path}/global.h" "{build.path}/sketch/global.h"
+recipe.hooks.prebuild.02.pattern="{custom.gnutool.path}/mkdir" -p "{build.path}/sketch"
+recipe.hooks.prebuild.03.pattern="{custom.gnutool.path}/cp" -n --preserve=timestamps "{custom.globalh.path}/global.h" "{build.path}/sketch/global.h"
 
 # This will get us a summary report of sizes on some interesting sections
 # the results are shown in the IDE build window, when verbose setting is checked.
