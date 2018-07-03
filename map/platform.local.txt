@@ -1,0 +1,22 @@
+#
+# Local platform.txt values
+#
+# Copy pasted this from platform.txt for reference.
+## These can be overridden in platform.local.txt
+# compiler.c.extra_flags=
+# compiler.c.elf.extra_flags=
+# compiler.S.extra_flags=
+# compiler.cpp.extra_flags=
+# compiler.ar.extra_flags=
+# compiler.objcopy.eep.extra_flags=
+# compiler.elf2hex.extra_flags=
+
+# This will get us a summary report of sizes on some interesting sections
+# It will show in the IDE build window, when verbose setting is checked.
+compiler.elf2iramsize.cmd=xtensa-lx106-elf-objdump
+compiler.elf2iramsize.flags=-h -w --section=.text --section=.irom0.text --section=.data --section=.bss --section=.rodata
+recipe.hooks.linking.postlink.1.pattern="{compiler.path}{compiler.elf2iramsize.cmd}" {compiler.elf2iramsize.flags} "{build.path}/{build.project_name}.elf"
+
+#
+# This will give us a map file in the build directory
+compiler.c.elf.extra_flags=-Wl,-Map,{build.path}/{build.project_name}.map

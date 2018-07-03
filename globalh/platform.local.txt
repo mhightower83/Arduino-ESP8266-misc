@@ -1,0 +1,33 @@
+#
+# Local platform.txt values
+#
+# Copy pasted this from platform.txt for reference.
+## These can be overridden in platform.local.txt
+# compiler.c.extra_flags=
+# compiler.c.elf.extra_flags=
+# compiler.S.extra_flags=
+# compiler.cpp.extra_flags=
+# compiler.ar.extra_flags=
+# compiler.objcopy.eep.extra_flags=
+# compiler.elf2hex.extra_flags=
+
+#
+# Add includes to give build access to ide_global.h and sketch/global.h files.
+#
+# Sigh, I could not find a build in variable for the Arduino sketch directory path
+custom.global.path=/usr/local/mhightow/Arduino/include
+custom.global.path.windows=C:\Users\mhightow\Documents\Arduino\include
+custom.unixtool.path=
+# On Windows it is assumed you have git installed
+# For Windows system use the the git version of popular Linux tools
+custom.unixtool.path.windows=C:\Program Files\Git\usr\bin
+
+compiler.c.extra_flags=-include "{custom.global.path}\ide_global.h" -include "{build.path}/sketch/global.h"
+compiler.S.extra_flags=-include "{custom.global.path}\ide_global.h" -include "{build.path}/sketch/global.h"
+compiler.cpp.extra_flags=-include "{custom.global.path}\ide_global.h" -include "{build.path}/sketch/global.h"
+
+# Copy a sketch/global.h template file into the build tree if it is missing.
+# This file is a default, if you have one in your sketch source directory, the
+# Arduino IDE build process will overwrite this default.
+recipe.hooks.prebuild.01.pattern="{custom.unixtool.path}/mkdir" -p "{build.path}/sketch"
+recipe.hooks.prebuild.02.pattern="{custom.unixtool.path}/cp" -n --preserve=timestamps "{custom.global.path}/global.h" "{build.path}/sketch/global.h"

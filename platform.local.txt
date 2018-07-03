@@ -20,18 +20,46 @@ build.my_project_flags=
 build.espurna_flags=
 build.espurna_ha_flags=
 
-# By adding a global.h here, we can have all libraries reference a common
-# include. This include can have a symbolic link into our project folders
-# assuming you use the usual duplicate include exclusion techniques.
-# Note, changes to global.h will effect all builds/sketches.
-# employ sketch conditionals in global.h for finer control.
-#
-
 build.my_project_name=
-# I wanted to use the Arduino IDE's Project Name to fill out this; however, 
+# I wanted to use the Arduino IDE's Project Name to fill out this; however,
 # {build.project_name} has a .ino extension. I see no way to remove it.
 
-compiler.c.extra_flags=-include "C:\Users\mhightower83\Documents\Arduino\include\_global.h" {build.espurna_flags} {build.my_project_flags} {build.espurna_ha_flags} {build.my_project_name}
-compiler.S.extra_flags=-include  {build.espurna_flags} {build.my_project_flags} {build.espurna_ha_flags} {build.my_project_name}
-compiler.cpp.extra_flags=-include "C:\Users\mhightower83\Documents\Arduino\include\_global.h" {build.espurna_flags} {build.my_project_flags} {build.espurna_ha_flags} {build.my_project_name}
+# The Arduino IDE lacks a covenant way to set build defines for a project.
+#
+# This is a work around for that. It requires requires two .h files be
+# available for every build. An ide_global.h file, common for all sketches. It
+# can be empty just needs to exist. Second file, global.h, must exist in
+# every sketch. It too can be empty.
+#
+# Additions to either of these files can be seen by core and library modules.
+# By adding sketch specific defines to sketch/global.h, a library can see those
+# definitions and be built with options specific to a sketchs requirements.
+#
+# Additions of defines to ide_global.h, will effect all modules built.
+#
+# Sigh, I could not find a build in variable for the Arduino sketch directory path
+custom.global.path=C:\Users\mhightow\Documents\Arduino\include
+custom.unixtool.path=
+# On Windows it is assumed you have git installed
+# For Windows system use the the git version of popular Linux tools
+custom.unixtool.path.windows=C:\Program Files\Git\usr\bin
+compiler.c.extra_flags=-include "{custom.global.path}\ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
+compiler.S.extra_flags=-include "{custom.global.path}\ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
+compiler.cpp.extra_flags=-include "{custom.global.path}\ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
 
+# Copy a sketch/global.h template file into the build tree if it is missing.
+# This file is a default, if you have one in your sketch source directory, the
+# Arduino IDE build process will overwrite this default.
+recipe.hooks.prebuild.01.pattern="{custom.unixtool.path}/mkdir" -p "{build.path}/sketch"
+recipe.hooks.prebuild.02.pattern="{custom.unixtool.path}/cp" -n --preserve=timestamps "{custom.global.path}/global.h" "{build.path}/sketch/global.h"
+
+# This will get us a summary report of sizes on some interesting sections
+# It will show in the IDE build window, when verbose setting is checked.
+compiler.elf2iramsize.cmd=xtensa-lx106-elf-objdump
+compiler.elf2iramsize.flags=-h -w --section=.text --section=.irom0.text --section=.data --section=.bss --section=.rodata
+compiler.elf2iramsize.extra_flags=
+recipe.hooks.linking.postlink.1.pattern="{compiler.path}{compiler.elf2iramsize.cmd}" {compiler.elf2iramsize.flags} {compiler.elf2iramsize.extra_flags} "{build.path}/{build.project_name}.elf"
+
+#
+# This will give us a map file in the build directory
+compiler.c.elf.extra_flags=-Wl,-Map,{build.path}/{build.project_name}.map
