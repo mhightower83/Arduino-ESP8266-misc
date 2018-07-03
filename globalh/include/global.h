@@ -1,7 +1,7 @@
 #pragma once
 /**
- * Place in this file sketch related defines that you would like the library
- * and core builds to pickup. These defines should be specific to this
+ * Place in this file, sketch related defines, that the library and core builds
+ * need to pickup. These defines should be specific to this
  * sketch. For defines you would like set for all Arduino IDE builds,
  * place those in .../Arduino/include/ide_global.h. Note, an empty default
  * copy of this global.h is also stored there.
