@@ -1,33 +1,19 @@
-#
-# Local platform.txt values
-#
-# Copy pasted this from platform.txt for reference.
-## These can be overridden in platform.local.txt
-# compiler.c.extra_flags=
-# compiler.c.elf.extra_flags=
-# compiler.S.extra_flags=
-# compiler.cpp.extra_flags=
-# compiler.ar.extra_flags=
-# compiler.objcopy.eep.extra_flags=
-# compiler.elf2hex.extra_flags=
-
+recipe.hooks.prebuild.01.pattern=echo You need to edit "platform.local.txt" and replace "**YourUserId**" with your user id.
 #
 #                Attention!
 #
-recipe.hooks.prebuild.01.pattern=echo You need to edit "platform.local.txt" and replace "YourUserId with your user id."
-# Delete the above line and edit below. Replace YourUserId with a value that
-# will result in custom.globalh.path pointing to your Arduino/include directory.
+# Delete the above lines and do edits below. Replace **YourUserId** with a value that
+# will result in custom.globalh.path pointing to your Sketchbook Arduino/include directory.
 # If you are not using default file locations, make other updates as need.
 
-
-custom.userid=YourUserId
+custom.userid=**YourUserId**
 
 
 
 custom.globalh.path=/home/{custom.userid}/Arduino/include
 custom.globalh.path.windows=C:\Users\{custom.userid}\Documents\Arduino\include
 custom.gnutool.path=/bin
-# On Windows I assumed GIT is installed.
+# Assumes GIT is installed on Windows systems.
 custom.gnutool.path.windows=C:\Program Files\Git\usr\bin
 
 compiler.c.extra_flags=-include "{custom.globalh.path}/ide_global.h" -include "{build.path}/sketch/global.h"
