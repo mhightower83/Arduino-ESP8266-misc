@@ -1,0 +1,41 @@
+#--------------- Delete Starts Here ---------------
+recipe.hooks.prebuild.01.pattern=echo You need to edit "platform.local.txt" and replace "**YourUserId**" with your user id.
+#--------------- Delete Stops Here ----------------
+#
+#                    Attention!
+#
+# Delete the above lines and do edits below. Replace **YourUserId** below
+# with a value that will result in custom.globals_h.path pointing to your
+# Sketchbook's Arduino/include directory. This would usually be the same
+# as your Login UserID. If you are not using default file locations, make
+# other updates as need.
+
+custom.userid=**YourUserId**
+
+
+
+custom.globals_h.path.linux=/home/{custom.userid}/Arduino/include
+custom.globals_h.path.windows=C:\Users\{custom.userid}\Documents\Arduino\include
+
+
+compiler.c.extra_flags=-include "{custom.globals_h.path}/ide_globals.h" -include "{build.path}/sketch/globals.h"
+compiler.S.extra_flags=-include "{custom.globals_h.path}/ide_globals.h" -include "{build.path}/sketch/globals.h"
+compiler.cpp.extra_flags=-include "{custom.globals_h.path}/ide_globals.h" -include "{build.path}/sketch/globals.h"
+
+
+#
+# We create a sketch/globals.h default file in the build tree.
+# If the sketch already has a globals.h file, the build process will copy
+# over the default file.
+# Note at least for Windows 7, the space after the redirect symbol and
+# the space before the closing parenthesis matter.
+recipe.hooks.prebuild.02.pattern.windows=cmd /c if not exist "{build.path}\sketch" (mkdir "{build.path}\sketch" )
+recipe.hooks.prebuild.03.pattern.windows=cmd /c if not exist "{build.path}\sketch\globals.h" (copy "{custom.globals_h.path}\globals.h" "{build.path}\sketch\globals.h" )
+recipe.hooks.prebuild.02.pattern.linux=mkdir -p "{build.path}/sketch"
+recipe.hooks.prebuild.03.pattern.linux=cp -n --preserve=timestamps "{custom.globals_h.path}/globals.h" "{build.path}/sketch/globals.h"
+
+
+#
+# Contains inspirations from :
+# https://github.com/arduino/arduino-builder/issues/15
+# https://forum.pjrc.com/threads/38533-HOWTO-Store-Projects-settings-(like-F_CPU-USB-Keyboard-layout)?p=172835&viewfull=1#post172835

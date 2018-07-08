@@ -22,43 +22,65 @@ build.espurna_ha_flags=
 build.my_project_name=
 
 
+
+#--------------- Delete Starts Here ---------------
+recipe.hooks.prebuild.01.pattern=echo You need to edit "platform.local.txt" and replace "**YourUserId**" with your user id.
+#--------------- Delete Stops Here ----------------
 #
-#                Attention!
+#                    Attention!
 #
-recipe.hooks.prebuild.01.pattern=echo You need to edit "platform.local.txt" and replace "YourUserId with your user id."
-# Delete the above line and edit below. Replace YourUserId with a value that
-# will result in custom.globalh.path pointing to your Arduino/include directory.
-# If you are not using default file locations, make other updates as need.
+# Delete the above lines and do edits below. Replace **YourUserId** below
+# with a value that will result in custom.globals_h.path pointing to your
+# Sketchbook's Arduino/include directory. This would usually be the same
+# as your Login UserID. If you are not using default file locations, make
+# other updates as need.
+
+custom.userid=**YourUserId**
 
 
-custom.userid=YourUserId
+
+custom.globals_h.path.linux=/home/{custom.userid}/Arduino/include
+custom.globals_h.path.windows=C:\Users\{custom.userid}\Documents\Arduino\include
 
 
+compiler.c.extra_flags=-include "{custom.globals_h.path}/ide_globals.h" -include "{build.path}/sketch/globals.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
+compiler.S.extra_flags=-include "{custom.globals_h.path}/ide_globals.h" -include "{build.path}/sketch/globals.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
+compiler.cpp.extra_flags=-include "{custom.globals_h.path}/ide_globals.h" -include "{build.path}/sketch/globals.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
 
-custom.globalh.path=/home/{custom.userid}/Arduino/include
-custom.globalh.path.windows=C:\Users\{custom.userid}\Documents\Arduino\include
-custom.gnutool.path=/bin
-# On Windows I assumed GIT is installed.
-custom.gnutool.path.windows=C:\Program Files\Git\usr\bin
 
-compiler.c.extra_flags=-include "{custom.globalh.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
-compiler.S.extra_flags=-include "{custom.globalh.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
-compiler.cpp.extra_flags=-include "{custom.globalh.path}/ide_global.h" -include "{build.path}/sketch/global.h" {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
+#
+# We create a sketch/globals.h default file in the build tree.
+# If the sketch already has a globals.h file, the build process will copy
+# over the default file.
+# Note at least for Windows 7, the space after the redirect symbol and
+# the space before the closing parenthesis are needed.
+recipe.hooks.prebuild.02.pattern.windows=cmd /c if not exist "{build.path}\sketch" (mkdir "{build.path}\sketch" )
+recipe.hooks.prebuild.03.pattern.windows=cmd /c if not exist "{build.path}\sketch\globals.h" (copy "{custom.globals_h.path}\globals.h" "{build.path}\sketch\globals.h" )
+recipe.hooks.prebuild.02.pattern.linux=mkdir -p "{build.path}/sketch"
+recipe.hooks.prebuild.03.pattern.linux=cp -n --preserve=timestamps "{custom.globals_h.path}/globals.h" "{build.path}/sketch/globals.h"
 
-# Copy a sketch/global.h template file into the build tree if it is missing.
-# This file is a default. If you have one in your sketch's source directory,
-# the Arduino IDE build process will replace the default.
-recipe.hooks.prebuild.02.pattern="{custom.gnutool.path}/mkdir" -p "{build.path}/sketch"
-recipe.hooks.prebuild.03.pattern="{custom.gnutool.path}/cp" -n --preserve=timestamps "{custom.globalh.path}/global.h" "{build.path}/sketch/global.h"
 
-# This will get us a summary report of sizes on some interesting sections
-# the results are shown in the IDE build window, when verbose setting is checked.
+#
+# This will print a summary report of sizes on some interesting sections.
+# For this to show, you need to check the box for "compilation" on the line
+# containing: "Show verbose output during: [] compilation [] upload"
+# in "Edit->File->Preferences".
 tools.elfsum.cmd=xtensa-lx106-elf-objdump
-tools.elfsum.path={compiler.path}
+tools.elfsum.path.linux={runtime.tools.xtensa-lx106-elf-gcc.path}/bin/
+tools.elfsum.path.windows={runtime.tools.xtensa-lx106-elf-gcc.path}\bin\
 tools.elfsum.flags=-h -w --section=.text --section=.irom0.text --section=.data --section=.bss --section=.rodata
 tools.elfsum.extra_flags=
-recipe.hooks.linking.postlink.1.pattern="{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}/{build.project_name}.elf"
+recipe.hooks.linking.postlink.01.pattern.linux="{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}/{build.project_name}.elf"
+recipe.hooks.linking.postlink.01.pattern.windows="{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}\{build.project_name}.elf"
+
 
 #
-# This will give us a map file in the build directory
-compiler.c.elf.extra_flags=-Wl,-Map,{build.path}/{build.project_name}.map
+# This will write a .map file in the build directory.
+compiler.c.elf.extra_flags.linux=-Wl,-Map,{build.path}/{build.project_name}.map
+compiler.c.elf.extra_flags.windows=-Wl,-Map,{build.path}\{build.project_name}.map
+
+
+#
+# Contains inspirations from :
+# https://github.com/arduino/arduino-builder/issues/15
+# https://forum.pjrc.com/threads/38533-HOWTO-Store-Projects-settings-(like-F_CPU-USB-Keyboard-layout)?p=172835&viewfull=1#post172835

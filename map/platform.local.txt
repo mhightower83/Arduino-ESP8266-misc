@@ -14,11 +14,14 @@
 # This will get us a summary report of sizes on some interesting sections
 # the results are shown in the IDE build window, when verbose setting is checked.
 tools.elfsum.cmd=xtensa-lx106-elf-objdump
-tools.elfsum.path={compiler.path}
+tools.elfsum.path=={runtime.tools.xtensa-lx106-elf-gcc.path}/bin/
+tools.elfsum.path.windows={runtime.tools.xtensa-lx106-elf-gcc.path}\bin\
 tools.elfsum.flags=-h -w --section=.text --section=.irom0.text --section=.data --section=.bss --section=.rodata
 tools.elfsum.extra_flags=
 recipe.hooks.linking.postlink.1.pattern="{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}/{build.project_name}.elf"
+recipe.hooks.linking.postlink.1.pattern.windows="{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}\{build.project_name}.elf"
 
 #
 # This will give us a map file in the build directory
 compiler.c.elf.extra_flags=-Wl,-Map,{build.path}/{build.project_name}.map
+compiler.c.elf.extra_flags.windows=-Wl,-Map,{build.path}\{build.project_name}.map
