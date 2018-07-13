@@ -19,7 +19,7 @@
 
 /*
  *
- *  Go into Edit->File->Preferences. Find the selection: 
+ *  Go into Edit->File->Preferences. Find the selection:
  *  "Show verbose output during: [] compilation [] upload"
  *  Check the check box for "compilation"
  *
