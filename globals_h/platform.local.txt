@@ -36,20 +36,11 @@ custom.ideglbl_h.build.pathname={custom.build.path}{custom.ideglbl_h.name}
 custom.flags_txt.build.pathname={custom.build.path}{custom.flags_txt.name}
 
 
-custom.globals_h.path.linux=/home/{custom.userid}/Arduino/include
-custom.globals_h.path.windows=C:\Users\{custom.userid}\Documents\Arduino\include
-
 compiler.global_flags=-include "{custom.ideglbl_h.build.pathname}" -include "{custom.globals_h.build.pathname}" -include "{custom.flags_txt.build.pathname}.h" @{custom.flags_txt.build.pathname}
 
-# These have to be defined here. They are set via boards.local.txt.
-build.my_project_flags=
-build.espurna_flags=
-build.espurna_ha_flags=
-build.my_project_name=
-
-compiler.c.extra_flags={compiler.global_flags} {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
-compiler.S.extra_flags={compiler.global_flags} {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
-compiler.cpp.extra_flags={compiler.global_flags} {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
+compiler.c.extra_flags={compiler.global_flags}
+compiler.S.extra_flags={compiler.global_flags}
+compiler.cpp.extra_flags={compiler.global_flags}
 
 
 #
@@ -82,31 +73,6 @@ recipe.hooks.prebuild.18.pattern.linux=bash -c "if [ ! -f {custom.ideglbl_h.buil
 recipe.hooks.prebuild.19.pattern.linux=bash -c "if [ ! -f {custom.globals_h.build.pathname}   ]; then touch -t 170001010000 {custom.globals_h.build.pathname}; fi;"
 recipe.hooks.prebuild.20.pattern.linux=bash -c "if [ ! -f {custom.flags_txt.build.pathname}   ]; then touch -t 170001010000 {custom.flags_txt.build.pathname}; fi;"
 recipe.hooks.prebuild.21.pattern.linux=bash -c "if [ ! -f {custom.flags_txt.build.pathname}.h ]; then touch -t 170001010000 {custom.flags_txt.build.pathname}.h; fi;"
-
-
 #
-# This will print a summary report of sizes on some interesting sections.
-# For this to show, you need to check the box for "compilation" on the line
-# containing: "Show verbose output during: [] compilation [] upload"
-# in "Edit->File->Preferences".
-tools.elfsum.cmd=xtensa-lx106-elf-objdump
-tools.elfsum.path.linux={runtime.tools.xtensa-lx106-elf-gcc.path}/bin/
-tools.elfsum.path.windows={runtime.tools.xtensa-lx106-elf-gcc.path}\bin\
-tools.elfsum.flags=-h -w --section=.text --section=.irom0.text --section=.data --section=.bss --section=.rodata
-tools.elfsum.extra_flags=
-recipe.hooks.linking.postlink.01.pattern.linux="{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}/{build.project_name}.elf"
-recipe.hooks.linking.postlink.01.pattern.windows="{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}\{build.project_name}.elf"
-
-# Alternative - reduces extra newlines on Windows, requires Git to be installed.
-# custom.gnutool.path.linux=
-# custom.gnutool.path.windows=C:\Program Files\Git\usr\bin\
-# recipe.hooks.linking.postlink.01.pattern.windows=cmd /c "{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}\{build.project_name}.elf" | "{custom.gnutool.path}tr" "\r" "\b"
-
-
-#
-# This will write a .map file in the build directory.
-compiler.c.elf.extra_flags.linux=-Wl,-Map,{build.path}/{build.project_name}.map
-compiler.c.elf.extra_flags.windows=-Wl,-Map,{build.path}\{build.project_name}.map
-#
-# from  https://github.com/mhightower83/Arduino-IDE-Tweaks
+# from https://github.com/mhightower83/Arduino-IDE-Tweaks
 #
