@@ -1,24 +1,26 @@
-#
-# Local platform.txt values
-#
-# Copy pasted this from platform.txt for reference.
-## These can be overridden in platform.local.txt
-# compiler.c.extra_flags=
-# compiler.c.elf.extra_flags=
-# compiler.S.extra_flags=
-# compiler.cpp.extra_flags=
-# compiler.ar.extra_flags=
-# compiler.objcopy.eep.extra_flags=
-# compiler.elf2hex.extra_flags=
 
-# This will get us a summary report of sizes on some interesting sections
-# the results are shown in the IDE build window, when verbose setting is checked.
+#
+# This will print a summary report of sizes on some interesting sections.
+# For this to show, you need to check the box for "compilation" on the line
+# containing: "Show verbose output during: [] compilation [] upload"
+# in "Edit->File->Preferences".
 tools.elfsum.cmd=xtensa-lx106-elf-objdump
-tools.elfsum.path={compiler.path}
+tools.elfsum.path.linux={runtime.tools.xtensa-lx106-elf-gcc.path}/bin/
+tools.elfsum.path.windows={runtime.tools.xtensa-lx106-elf-gcc.path}\bin\
 tools.elfsum.flags=-h -w --section=.text --section=.irom0.text --section=.data --section=.bss --section=.rodata
 tools.elfsum.extra_flags=
-recipe.hooks.linking.postlink.1.pattern="{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}/{build.project_name}.elf"
+recipe.hooks.linking.postlink.01.pattern.linux="{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}/{build.project_name}.elf"
+recipe.hooks.linking.postlink.01.pattern.windows="{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}\{build.project_name}.elf"
+# Alternative - reduces extra newlines on Windows, requires Git to be installed.
+# custom.gnutool.path.linux=
+# custom.gnutool.path.windows=C:\Program Files\Git\usr\bin\
+# recipe.hooks.linking.postlink.01.pattern.windows=cmd /c "{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}\{build.project_name}.elf" | "{custom.gnutool.path}tr" "\r" "\b"
+
 
 #
-# This will give us a map file in the build directory
-compiler.c.elf.extra_flags=-Wl,-Map,{build.path}/{build.project_name}.map
+# This will write a .map file in the build directory.
+compiler.c.elf.extra_flags.linux=-Wl,-Map,{build.path}/{build.project_name}.map
+compiler.c.elf.extra_flags.windows=-Wl,-Map,{build.path}\{build.project_name}.map
+#
+# from  https://github.com/mhightower83/Arduino-IDE-Tweaks
+#
