@@ -53,10 +53,10 @@ compiler.cpp.extra_flags={compiler.global_flags} {build.espurna_flags} {build.es
 
 
 #
-# Here we handle the copying of global files, in there respective locations,
+# Here we handle the copying of global files, from their respective locations,
 # to the build tree. With attention to newness as needed.
 # compiler_flags.txt needs more attention because .txt files are not
-# tracked in the build dependencies. This is addressed my managing a ghost
+# tracked by the build dependencies. This is addressed by managing a ghost
 # file by its name with a .h extension. compiler_flags.txt's time stamp is
 # tracked and its ghost image is updated as needed.
 # ref https://stackoverflow.com/a/8055430 for && vs & usage in Windows cmd

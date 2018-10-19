@@ -7,5 +7,8 @@
  *   https://github.com/mhightower83/Arduino-IDE-Tweaks/wiki/global-defines
  *
  */
+#if (__ASSEMBLER__ == 0)
 
+ 
+#endif
 #endif

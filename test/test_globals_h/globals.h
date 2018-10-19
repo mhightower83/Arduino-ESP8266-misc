@@ -21,7 +21,7 @@
  *
  *  Go into Edit->File->Preferences. Find the selection:
  *  "Show verbose output during: [] compilation [] upload"
- *  Check the check box for "compilation"
+ *  Check the checkbox for "compilation"
  *
  *  Also make note of your current setting for compiler warnings.
  *  Now change the "Compiler warnings:" to "none".
