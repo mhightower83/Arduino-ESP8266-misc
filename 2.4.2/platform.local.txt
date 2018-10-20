@@ -1,0 +1,163 @@
+#
+#
+#                    Attention!
+#
+# Replace YourUserId below with your Login UserID. This value should results
+# in "custom.ideglobal.source.path" pointing to your include directory,
+# which is located at the top level of your Sketchbook directory.
+# If you are not using default file names or locations, make updates as need.
+
+custom.userid=YourUserId
+custom.ideglbl_h.name=ide_globals.h
+custom.globals_h.name=globals.h
+custom.flags_txt.name=compiler_flags.txt
+
+#----- This Section can be deleted, it served as a reminder to ---------------
+#----- edit "custom.userid=YourUserId".
+#----- Starts Here ---------------
+recipe.hooks.prebuild.01.pattern.windows=cmd /c if z{custom.userid} == zYourUserId (echo You need to edit platform.local.txt and change, custom.userid=YourUserId, to be equal to your UserID. )
+recipe.hooks.prebuild.01.pattern.linux=bash -c "if [ z{custom.userid} = zYourUserId ]; then echo You\ need\ to\ edit\ platform.local.txt\ and\ change,\ custom.userid=YourUserId,\ to\ be\ equal\ to\ your\ UserID.; fi;"
+#----- Stops Here ---------------
+#
+#------------- There is usually no need to edit below this line --------------
+#
+
+# For Windows a path to gnu tool set. Git comes with a nice set and bash shell.
+custom.git.path.linux=
+custom.git.path.windows=C:\Program Files\Git
+#custom.git.path.windows=C:\Program Files (x86)\Git
+custom.gnutool.path.linux=
+custom.gnutool.path.windows={custom.git.path}\usr\bin\
+
+
+custom.ideglobal.path.linux=/home/{custom.userid}/Arduino/include/
+custom.ideglobal.path.windows=C:\Users\{custom.userid}\Documents\Arduino\include\
+custom.source.path.linux={build.source.path}/
+custom.source.path.windows={build.source.path}\
+custom.ideglbl_h.source.pathname={custom.ideglobal.path}{custom.ideglbl_h.name}
+custom.globals_h.source.pathname={custom.source.path}{custom.globals_h.name}
+custom.flags_txt.source.pathname={custom.source.path}{custom.flags_txt.name}
+
+custom.build.path.linux={build.path}/custom/
+custom.build.path.windows={build.path}\custom\
+custom.globals_h.build.pathname={custom.build.path}{custom.globals_h.name}
+custom.ideglbl_h.build.pathname={custom.build.path}{custom.ideglbl_h.name}
+custom.flags_txt.build.pathname={custom.build.path}{custom.flags_txt.name}
+
+compiler.global_flags=-include "{custom.ideglbl_h.build.pathname}" -include "{custom.globals_h.build.pathname}" -include "{custom.flags_txt.build.pathname}.h" @{custom.flags_txt.build.pathname}
+assembler.global_flags=-include "{custom.flags_txt.build.pathname}.h" @{custom.flags_txt.build.pathname}
+
+# These have to be defined here. They are set via boards.local.txt.
+build.my_project_flags=
+build.espurna_flags=
+build.espurna_ha_flags=
+build.my_project_name=
+
+# This is used in Core 2.4 added here so this file will work for 2.3
+build.led=
+
+compiler.c.extra_flags={compiler.global_flags} {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
+compiler.S.extra_flags={assembler.global_flags} {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
+compiler.cpp.extra_flags={compiler.global_flags} {build.espurna_flags} {build.espurna_ha_flags} {build.my_project_flags} {build.my_project_name}
+
+#
+# Here we handle the copying of global files, from their respective locations,
+# to the build tree. With attention to newness as needed.
+# compiler_flags.txt needs more attention because .txt files are not
+# tracked by the build dependencies. This is addressed by managing a ghost
+# file by its name with a .h extension. compiler_flags.txt's time stamp is
+# tracked and its ghost image is updated as needed.
+# ref https://stackoverflow.com/a/8055430 for && vs & usage in Windows cmd
+recipe.hooks.prebuild.11.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.build.path} (mkdir {custom.build.path} )"
+recipe.hooks.prebuild.12.pattern.windows=cmd /v:on /e:on /c "if     exist {custom.ideglbl_h.source.pathname} (copy {custom.ideglbl_h.source.pathname} {custom.ideglbl_h.build.pathname} )"
+recipe.hooks.prebuild.13.pattern.windows=cmd /v:on /e:on /c "if     exist {custom.globals_h.source.pathname} (copy {custom.globals_h.source.pathname} {custom.globals_h.build.pathname} )"
+recipe.hooks.prebuild.14.pattern.windows=cmd /v:on /e:on /c "if     exist {custom.flags_txt.source.pathname} (fc /b {custom.flags_txt.source.pathname} {custom.flags_txt.build.pathname} ) >nul 2>&1 || (copy {custom.flags_txt.source.pathname} {custom.flags_txt.build.pathname} & type NUL> {custom.flags_txt.build.pathname}.h )"
+recipe.hooks.prebuild.15.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.ideglbl_h.source.pathname} (for %f in ( {custom.ideglbl_h.build.pathname} ) do set size=%~zf) & (if not defined size set size=0) & (if !size! NEQ 0 type NUL> {custom.ideglbl_h.build.pathname} )"
+recipe.hooks.prebuild.16.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.globals_h.source.pathname} (for %f in ( {custom.globals_h.build.pathname} ) do set size=%~zf) & (if not defined size set size=0) & (if !size! NEQ 0 type NUL> {custom.globals_h.build.pathname} )"
+recipe.hooks.prebuild.17.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.flags_txt.source.pathname} (for %f in ( {custom.flags_txt.build.pathname} ) do set size=%~zf) & (if not defined size set size=0) & (if !size! NEQ 0 (type NUL> {custom.flags_txt.build.pathname} & type NUL> {custom.flags_txt.build.pathname}.h ) )"
+recipe.hooks.prebuild.18.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.ideglbl_h.build.pathname}   (type NUL> {custom.ideglbl_h.build.pathname} )"
+recipe.hooks.prebuild.19.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.globals_h.build.pathname}   (type NUL> {custom.globals_h.build.pathname} )"
+recipe.hooks.prebuild.20.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.flags_txt.build.pathname}   (type NUL> {custom.flags_txt.build.pathname} )"
+recipe.hooks.prebuild.21.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.flags_txt.build.pathname}.h (type NUL> {custom.flags_txt.build.pathname}.h )"
+
+recipe.hooks.prebuild.11.pattern.linux=mkdir -p "{custom.build.path}"
+recipe.hooks.prebuild.12.pattern.linux=bash -c "if [   -f {custom.ideglbl_h.source.pathname}  ]; then cp -u {custom.ideglbl_h.source.pathname} {custom.ideglbl_h.build.pathname}; fi;"
+recipe.hooks.prebuild.13.pattern.linux=bash -c "if [   -f {custom.globals_h.source.pathname}  ]; then cp -u {custom.globals_h.source.pathname} {custom.globals_h.build.pathname}; fi;"
+recipe.hooks.prebuild.14.pattern.linux=bash -c "if [   -f {custom.flags_txt.source.pathname}  ]; then if [ {custom.flags_txt.source.pathname} -nt {custom.flags_txt.build.pathname} ]; then cp -u {custom.flags_txt.source.pathname} {custom.flags_txt.build.pathname}; touch {custom.flags_txt.build.pathname}.h; fi; fi;"
+recipe.hooks.prebuild.15.pattern.linux=bash -c "if [ ! -f {custom.ideglbl_h.source.pathname}  ]; then if [ -s {custom.ideglbl_h.build.pathname} ]; then rm {custom.ideglbl_h.build.pathname}; touch {custom.ideglbl_h.build.pathname}; fi; fi;"
+recipe.hooks.prebuild.16.pattern.linux=bash -c "if [ ! -f {custom.globals_h.source.pathname}  ]; then if [ -s {custom.globals_h.build.pathname} ]; then rm {custom.globals_h.build.pathname}; touch {custom.globals_h.build.pathname}; fi; fi;"
+recipe.hooks.prebuild.17.pattern.linux=bash -c "if [ ! -f {custom.flags_txt.source.pathname}  ]; then if [ -s {custom.flags_txt.build.pathname} ]; then rm {custom.flags_txt.build.pathname}; touch {custom.flags_txt.build.pathname} {custom.flags_txt.build.pathname}.h; fi; fi;"
+recipe.hooks.prebuild.18.pattern.linux=bash -c "if [ ! -f {custom.ideglbl_h.build.pathname}   ]; then touch -t 170001010000 {custom.ideglbl_h.build.pathname}; fi;"
+recipe.hooks.prebuild.19.pattern.linux=bash -c "if [ ! -f {custom.globals_h.build.pathname}   ]; then touch -t 170001010000 {custom.globals_h.build.pathname}; fi;"
+recipe.hooks.prebuild.20.pattern.linux=bash -c "if [ ! -f {custom.flags_txt.build.pathname}   ]; then touch -t 170001010000 {custom.flags_txt.build.pathname}; fi;"
+recipe.hooks.prebuild.21.pattern.linux=bash -c "if [ ! -f {custom.flags_txt.build.pathname}.h ]; then touch -t 170001010000 {custom.flags_txt.build.pathname}.h; fi;"
+
+#
+# This will print a summary report of sizes on some interesting sections.
+# For this to show, you need to check the box for "compilation" on the line
+# containing: "Show verbose output during: [] compilation [] upload"
+# in "Edit->File->Preferences".
+
+# This is needed for some configurations. Based on linux version in platform.txt
+runtime.tools.xtensa-lx106-elf-gcc.path.windows={runtime.platform.path}\tools\xtensa-lx106-elf
+
+tools.elfsum.cmd=xtensa-lx106-elf-objdump
+tools.elfsum.path.linux={runtime.tools.xtensa-lx106-elf-gcc.path}/bin/
+tools.elfsum.path.windows={runtime.tools.xtensa-lx106-elf-gcc.path}\bin\
+tools.elfsum.flags=-h -w --section=.text --section=.irom0.text --section=.data --section=.bss --section=.rodata
+tools.elfsum.extra_flags=
+recipe.hooks.linking.postlink.01.pattern.linux="{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}/{build.project_name}.elf"
+recipe.hooks.linking.postlink.01.pattern.windows="{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}\{build.project_name}.elf"
+
+# Alternative - reduces extra newlines on Windows, requires Git to be installed.
+recipe.hooks.linking.postlink.01.pattern.windows=cmd /c "{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}\{build.project_name}.elf" | "{custom.gnutool.path}tr" "\r" "\b"
+
+
+#
+# This will write a .map file in the build directory.
+compiler.c.elf.extra_flags.linux=-Wl,-Map,{build.path}/{build.project_name}.map
+compiler.c.elf.extra_flags.windows=-Wl,-Map,{build.path}\{build.project_name}.map
+#
+# from  https://github.com/mhightower83/Arduino-IDE-Tweaks
+#
+
+#
+# ----- These try to resolve and work around issues in platform.txt
+#
+# This line is for Core 2.4.1 and 2.4.2 fixes a typo: compiler.c.extra_flags should have been compiler.S.extra_flags
+recipe.S.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.cpreprocessor.flags} {compiler.S.flags} -DF_CPU={build.f_cpu} {build.lwip_flags} {build.debug_port} {build.debug_level} -DARDUINO={runtime.ide.version} -DARDUINO_{build.board} -DARDUINO_ARCH_{build.arch} -DARDUINO_BOARD="{build.board}" {build.led} {compiler.S.extra_flags} {build.extra_flags} {includes} "{source_file}" -o "{object_file}"
+
+# Remove these recipes for creating Git version #defines
+# These #defines need to be available before core modules are built.
+# By listing these recipes w/o values here, we redefine them to empty,
+# overriding platform.txt.
+recipe.hooks.core.prebuild.1.pattern=
+recipe.hooks.core.prebuild.2.pattern=
+recipe.hooks.core.prebuild.1.pattern.windows=
+recipe.hooks.core.prebuild.2.pattern.windows=
+#
+# Replacement recipes for creating core/core_version.h.
+# Moved the bash commands to script mk_core_version_h.sh.
+# For windows use bash shell from Git install to run script via runbash.bat
+recipe.hooks.prebuild.1.pattern=bash -c "{runtime.platform.path}/mk_core_version_h.sh "{build.path} {runtime.platform.path} {version}"
+recipe.hooks.prebuild.1.pattern.windows=cmd /c "{runtime.platform.path}\runbash.bat" "{custom.git.path}" "{runtime.platform.path}/mk_core_version_h.sh" "{build.path}" "{runtime.platform.path}" "{version}"
+
+## This block is for Core 2.4.2 and up only
+## Copied this over from platform.txt so we can keep all patches/mods
+## in one place, platform.local.txt.
+## Build the app.ld linker file
+# This significantly slows down development. It prevents caching core compilations.
+# Fixed it by back dateing the file it created, with "...prelink.2". On Windows it needs GNU tools from GIT
+# recipe.hooks.linking.prelink.1.pattern="{compiler.path}{compiler.c.cmd}" -CC -E -P {build.vtable_flags} "{runtime.platform.path}/tools/sdk/ld/eagle.app.v6.common.ld.h" -o "{runtime.platform.path}/tools/sdk/ld/eagle.app.v6.common.ld"
+recipe.hooks.linking.prelink.2.pattern=touch -t 170001010000 "{runtime.platform.path}/tools/sdk/ld/eagle.app.v6.common.ld"
+recipe.hooks.linking.prelink.2.pattern.windows="{custom.gnutool.path}touch" -t 170001010000 "{runtime.platform.path}/tools/sdk/ld/eagle.app.v6.common.ld"
+
+# Fix-ups for Core 2.4.2 due to changes in Arduino IDE 1.8.7. grabbed from:
+# https://github.com/esp8266/Arduino/commit/85e68093e94b4e5c5e711888b8b5facee1bd4f9f#diff-d638a47d1ca0e2a5585fb34c7d7fb0f9L95
+# directed to above, from : https://github.com/esp8266/Arduino/issues/5169
+# Not sure about what if anything is needed for Core 2.3.0
+## Create archives
+recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compiler.ar.extra_flags} "{archive_file_path}" "{object_file}"
+
+## Combine gc-sections, archives, and objects
+recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" -Wl,-Map "-Wl,{build.path}/{build.project_name}.map" {compiler.c.elf.flags} {compiler.c.elf.extra_flags} -o "{build.path}/{build.project_name}.elf" -Wl,--start-group {object_files} "{archive_file_path}" {compiler.c.elf.libs} -Wl,--end-group  "-L{build.path}"
