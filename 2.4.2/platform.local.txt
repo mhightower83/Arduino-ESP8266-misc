@@ -6,7 +6,7 @@
 # which is located at the top level of your Sketchbook directory.
 # If you are not using default file names or locations, make updates as need.
 
-custom.userid=mhightow
+custom.userid=YourUserId
 custom.ideglbl_h.name=ide_globals.h
 custom.globals_h.name=globals.h
 custom.flags_txt.name=compiler_flags.txt
