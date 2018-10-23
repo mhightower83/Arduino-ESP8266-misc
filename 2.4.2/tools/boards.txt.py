@@ -951,7 +951,6 @@ boards = collections.OrderedDict([
             '.build.board': 'ESP8266_ESP01',
             '.menu.FlashMode.dout': 'DOUT',
             '.menu.led.13': '13',
-            # '.menu.led.13.build.led': '-DLED_BUILTIN=13',
             '.menu.BoardModel.sonoff4CH': 'ITEAD Sonoff 4CH',
             '.menu.BoardModel.sonoff4CH.build.extra_flags': '-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_4CH',
             '.menu.BoardModel.sonoff4CHPro': 'ITEAD Sonoff 4CH Pro',

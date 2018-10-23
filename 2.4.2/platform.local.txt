@@ -1,5 +1,4 @@
-#
-#
+##
 #                    Attention!
 #
 # Replace YourUserId below with your Login UserID. This value should results
@@ -111,7 +110,6 @@ recipe.hooks.linking.postlink.01.pattern.windows="{tools.elfsum.path}{tools.elfs
 
 # Alternative - reduces extra newlines on Windows, requires Git to be installed.
 recipe.hooks.linking.postlink.01.pattern.windows=cmd /c "{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}\{build.project_name}.elf" | "{custom.gnutool.path}tr" "\r" "\b"
-
 
 #
 # This will write a .map file in the build directory.

@@ -26,6 +26,9 @@ getshortsha1() {
     echo \#define ARDUINO_ESP8266_GIT_VER 0x${shortsha1}
 }
 
+#R mkdir -p "${buildpath}/core" && echo \#define ARDUINO_ESP8266_GIT_VER 0x`git --git-dir "${runtimeplatformpath}/.git" rev-parse --short=8 HEAD 2>/dev/null || echo ffffffff` >"${buildpath}/core/core_version.txt"
+#R mkdir -p "${buildpath}/core" && echo \#define ARDUINO_ESP8266_GIT_DESC `cd "${runtimeplatformpath}"; git describe --tags 2>/dev/null || echo unix-${version}` >>"${buildpath}/core/core_version.txt"
+
 mkdir -p "${buildpath}/core" || exit 1
 getshortsha1 >"${buildpath}/core/core_version.txt"
 getcoreversion >>"${buildpath}/core/core_version.txt"
