@@ -1,4 +1,7 @@
 # From Customized boards.txt.py
+# Abbreviated boards.txt created by: ./tools/boards.txt.py --boardsgen --boardlist
+# The following boards were included:  --board=generic --board=esp8285 --board=huzzah --board=sonoff --board=espurnakmc --board=espurna --board=espurna85
+
 # These setup some defaults I like.
 huzzah.menu.FlashSize.4M3M=4M (3M SPIFFS)
 huzzah.menu.UploadSpeed.921600=921600
@@ -19,6 +22,9 @@ sonoff.pid.0=0x6001
 #
 
 menu.BoardModel=Model
+menu.my_project_flags=Project Build Flags
+menu.espurna_ha=HA Platform
+menu.espurna_flags=ESPurna Build Flags
 menu.UploadSpeed=Upload Speed
 menu.CpuFrequency=CPU Frequency
 menu.CrystalFreq=Crystal Frequency
@@ -33,9 +39,6 @@ menu.LwIPVariant=lwIP Variant
 menu.VTable=VTables
 menu.led=Builtin Led
 menu.FlashErase=Erase Flash
-menu.my_project_flags=Project Build Flags
-menu.espurna_ha=HA Platform
-menu.espurna_flags=ESPurna Build Flags
 
 ##############################################################
 generic.name=Generic ESP8266 Module
@@ -847,6 +850,13 @@ sonoff.menu.VTable.heap=Heap
 sonoff.menu.VTable.heap.build.vtable_flags=-DVTABLES_IN_DRAM
 sonoff.menu.VTable.iram=IRAM
 sonoff.menu.VTable.iram.build.vtable_flags=-DVTABLES_IN_IRAM
+sonoff.menu.my_project_flags.none=none
+sonoff.menu.my_project_flags.nameresolv1=LLMNR Support
+sonoff.menu.my_project_flags.nameresolv1.build.my_project_flags=-DLLMNR_SUPPORT
+sonoff.menu.my_project_flags.nameresolv2=NetBIOS Support
+sonoff.menu.my_project_flags.nameresolv2.build.my_project_flags=-DNETBIOS_SUPPORT
+sonoff.menu.my_project_flags.nameresolv3=LLMNR and NetBIOS Support
+sonoff.menu.my_project_flags.nameresolv3.build.my_project_flags=-DLLMNR_SUPPORT -DNETBIOS_SUPPORT
 sonoff.menu.ResetMethod.none=none
 sonoff.menu.ResetMethod.none.upload.resetmethod=none
 sonoff.menu.ResetMethod.dtrset=dtrset
@@ -1004,13 +1014,6 @@ sonoff.menu.FlashSize.16M15M.build.rfcal_addr=0xFFC000
 sonoff.menu.FlashSize.16M15M.build.spiffs_start=0x100000
 sonoff.menu.FlashSize.16M15M.build.spiffs_end=0xFFB000
 sonoff.menu.FlashSize.16M15M.build.spiffs_blocksize=8192
-sonoff.menu.my_project_flags.none=none
-sonoff.menu.my_project_flags.nameresolv1=LLMNR Support
-sonoff.menu.my_project_flags.nameresolv1.build.my_project_flags=-DLLMNR_SUPPORT
-sonoff.menu.my_project_flags.nameresolv2=NetBIOS Support
-sonoff.menu.my_project_flags.nameresolv2.build.my_project_flags=-DNETBIOS_SUPPORT
-sonoff.menu.my_project_flags.nameresolv3=LLMNR and NetBIOS Support
-sonoff.menu.my_project_flags.nameresolv3.build.my_project_flags=-DLLMNR_SUPPORT -DNETBIOS_SUPPORT
 sonoff.menu.LwIPVariant.v2mss536=v2 Lower Memory
 sonoff.menu.LwIPVariant.v2mss536.build.lwip_include=lwip2/include
 sonoff.menu.LwIPVariant.v2mss536.build.lwip_lib=-llwip2
@@ -1108,42 +1111,287 @@ sonoff.menu.UploadSpeed.921600=921600
 sonoff.menu.UploadSpeed.921600.upload.speed=921600
 
 ##############################################################
+espurnakmc.name=ESPurna for KMC 70011
+espurnakmc.build.board=ESP8266_GENERIC
+espurnakmc.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DKMC_70011
+espurnakmc.build.led=-DLED_BUILTIN=13
+espurnakmc.upload.tool=esptool
+espurnakmc.upload.maximum_data_size=81920
+espurnakmc.upload.wait_for_upload_port=true
+espurnakmc.upload.erase_cmd=
+espurnakmc.serial.disableDTR=true
+espurnakmc.serial.disableRTS=true
+espurnakmc.build.mcu=esp8266
+espurnakmc.build.core=esp8266
+espurnakmc.build.variant=generic
+espurnakmc.build.spiffs_pagesize=256
+espurnakmc.build.debug_port=
+espurnakmc.build.debug_level=
+espurnakmc.menu.CpuFrequency.80=80 MHz
+espurnakmc.menu.CpuFrequency.80.build.f_cpu=80000000L
+espurnakmc.menu.CpuFrequency.160=160 MHz
+espurnakmc.menu.CpuFrequency.160.build.f_cpu=160000000L
+espurnakmc.menu.VTable.flash=Flash
+espurnakmc.menu.VTable.flash.build.vtable_flags=-DVTABLES_IN_FLASH
+espurnakmc.menu.VTable.heap=Heap
+espurnakmc.menu.VTable.heap.build.vtable_flags=-DVTABLES_IN_DRAM
+espurnakmc.menu.VTable.iram=IRAM
+espurnakmc.menu.VTable.iram.build.vtable_flags=-DVTABLES_IN_IRAM
+espurnakmc.menu.espurna_ha.turnOnHaDomoticz=Domoticz
+espurnakmc.menu.espurna_ha.turnOnHaDomoticz.build.espurna_ha_flags=-DHOMEASSISTANT_SUPPORT=0 -DTHINGSPEAK_SUPPORT=0 -DDOMOTICZ_SUPPORT=1
+espurnakmc.menu.espurna_ha.turnOnHaHomeAssistant=Home Assistant
+espurnakmc.menu.espurna_ha.turnOnHaHomeAssistant.build.espurna_ha_flags=-DHOMEASSISTANT_SUPPORT=1 -DTHINGSPEAK_SUPPORT=0 -DDOMOTICZ_SUPPORT=0
+espurnakmc.menu.espurna_ha.turnOnHaThinkspeak=Thinkspeak
+espurnakmc.menu.espurna_ha.turnOnHaThinkspeak.build.espurna_ha_flags=-DHOMEASSISTANT_SUPPORT=0 -DTHINGSPEAK_SUPPORT=1 -DDOMOTICZ_SUPPORT=0
+espurnakmc.menu.espurna_ha.none=none
+espurnakmc.menu.espurna_flags.none=none
+espurnakmc.menu.espurna_flags.i2cSupport=I2C Support
+espurnakmc.menu.espurna_flags.i2cSupport.build.espurna_flags=-DI2C_SUPPORT=1
+espurnakmc.menu.espurna_flags.dallasSupport=Dallas Support
+espurnakmc.menu.espurna_flags.dallasSupport.build.espurna_flags=-DDALLAS_SUPPORT=1
+espurnakmc.menu.espurna_flags.dhtSupport=DHT Support
+espurnakmc.menu.espurna_flags.dhtSupport.build.espurna_flags=-DDHT_SUPPORT=1
+espurnakmc.menu.espurna_flags.hlw9012Support=HLW9012 Support
+espurnakmc.menu.espurna_flags.hlw9012Support.build.espurna_flags=-DHLW8012_SUPPORT=1
+espurnakmc.menu.my_project_flags.none=none
+espurnakmc.menu.my_project_flags.nameresolv1=LLMNR Support
+espurnakmc.menu.my_project_flags.nameresolv1.build.my_project_flags=-DLLMNR_SUPPORT
+espurnakmc.menu.my_project_flags.nameresolv2=NetBIOS Support
+espurnakmc.menu.my_project_flags.nameresolv2.build.my_project_flags=-DNETBIOS_SUPPORT
+espurnakmc.menu.my_project_flags.nameresolv3=LLMNR and NetBIOS Support
+espurnakmc.menu.my_project_flags.nameresolv3.build.my_project_flags=-DLLMNR_SUPPORT -DNETBIOS_SUPPORT
+espurnakmc.menu.ResetMethod.none=none
+espurnakmc.menu.ResetMethod.none.upload.resetmethod=none
+espurnakmc.menu.ResetMethod.dtrset=dtrset
+espurnakmc.menu.ResetMethod.dtrset.upload.resetmethod=dtrset
+espurnakmc.menu.ResetMethod.ck=ck
+espurnakmc.menu.ResetMethod.ck.upload.resetmethod=ck
+espurnakmc.menu.ResetMethod.nodemcu=nodemcu
+espurnakmc.menu.ResetMethod.nodemcu.upload.resetmethod=nodemcu
+espurnakmc.build.flash_freq=40
+espurnakmc.build.flash_mode=qio
+espurnakmc.menu.FlashSize.1M0=1M (no SPIFFS)
+espurnakmc.menu.FlashSize.1M0.build.flash_size=1M
+espurnakmc.menu.FlashSize.1M0.build.flash_size_bytes=0x100000
+espurnakmc.menu.FlashSize.1M0.build.flash_ld=eagle.flash.1m0.ld
+espurnakmc.menu.FlashSize.1M0.build.spiffs_pagesize=256
+espurnakmc.menu.FlashSize.1M0.upload.maximum_size=1023984
+espurnakmc.menu.FlashSize.1M0.build.rfcal_addr=0xFC000
+espurnakmc.menu.FlashSize.1M64=1M (64K SPIFFS)
+espurnakmc.menu.FlashSize.1M64.build.flash_size=1M
+espurnakmc.menu.FlashSize.1M64.build.flash_size_bytes=0x100000
+espurnakmc.menu.FlashSize.1M64.build.flash_ld=eagle.flash.1m64.ld
+espurnakmc.menu.FlashSize.1M64.build.spiffs_pagesize=256
+espurnakmc.menu.FlashSize.1M64.upload.maximum_size=958448
+espurnakmc.menu.FlashSize.1M64.build.rfcal_addr=0xFC000
+espurnakmc.menu.FlashSize.1M64.build.spiffs_start=0xEB000
+espurnakmc.menu.FlashSize.1M64.build.spiffs_end=0xFB000
+espurnakmc.menu.FlashSize.1M64.build.spiffs_blocksize=4096
+espurnakmc.menu.FlashSize.1M128=1M (128K SPIFFS)
+espurnakmc.menu.FlashSize.1M128.build.flash_size=1M
+espurnakmc.menu.FlashSize.1M128.build.flash_size_bytes=0x100000
+espurnakmc.menu.FlashSize.1M128.build.flash_ld=eagle.flash.1m128.ld
+espurnakmc.menu.FlashSize.1M128.build.spiffs_pagesize=256
+espurnakmc.menu.FlashSize.1M128.upload.maximum_size=892912
+espurnakmc.menu.FlashSize.1M128.build.rfcal_addr=0xFC000
+espurnakmc.menu.FlashSize.1M128.build.spiffs_start=0xDB000
+espurnakmc.menu.FlashSize.1M128.build.spiffs_end=0xFB000
+espurnakmc.menu.FlashSize.1M128.build.spiffs_blocksize=4096
+espurnakmc.menu.FlashSize.1M144=1M (144K SPIFFS)
+espurnakmc.menu.FlashSize.1M144.build.flash_size=1M
+espurnakmc.menu.FlashSize.1M144.build.flash_size_bytes=0x100000
+espurnakmc.menu.FlashSize.1M144.build.flash_ld=eagle.flash.1m144.ld
+espurnakmc.menu.FlashSize.1M144.build.spiffs_pagesize=256
+espurnakmc.menu.FlashSize.1M144.upload.maximum_size=876528
+espurnakmc.menu.FlashSize.1M144.build.rfcal_addr=0xFC000
+espurnakmc.menu.FlashSize.1M144.build.spiffs_start=0xD7000
+espurnakmc.menu.FlashSize.1M144.build.spiffs_end=0xFB000
+espurnakmc.menu.FlashSize.1M144.build.spiffs_blocksize=4096
+espurnakmc.menu.FlashSize.1M160=1M (160K SPIFFS)
+espurnakmc.menu.FlashSize.1M160.build.flash_size=1M
+espurnakmc.menu.FlashSize.1M160.build.flash_size_bytes=0x100000
+espurnakmc.menu.FlashSize.1M160.build.flash_ld=eagle.flash.1m160.ld
+espurnakmc.menu.FlashSize.1M160.build.spiffs_pagesize=256
+espurnakmc.menu.FlashSize.1M160.upload.maximum_size=860144
+espurnakmc.menu.FlashSize.1M160.build.rfcal_addr=0xFC000
+espurnakmc.menu.FlashSize.1M160.build.spiffs_start=0xD3000
+espurnakmc.menu.FlashSize.1M160.build.spiffs_end=0xFB000
+espurnakmc.menu.FlashSize.1M160.build.spiffs_blocksize=4096
+espurnakmc.menu.FlashSize.1M192=1M (192K SPIFFS)
+espurnakmc.menu.FlashSize.1M192.build.flash_size=1M
+espurnakmc.menu.FlashSize.1M192.build.flash_size_bytes=0x100000
+espurnakmc.menu.FlashSize.1M192.build.flash_ld=eagle.flash.1m192.ld
+espurnakmc.menu.FlashSize.1M192.build.spiffs_pagesize=256
+espurnakmc.menu.FlashSize.1M192.upload.maximum_size=827376
+espurnakmc.menu.FlashSize.1M192.build.rfcal_addr=0xFC000
+espurnakmc.menu.FlashSize.1M192.build.spiffs_start=0xCB000
+espurnakmc.menu.FlashSize.1M192.build.spiffs_end=0xFB000
+espurnakmc.menu.FlashSize.1M192.build.spiffs_blocksize=4096
+espurnakmc.menu.FlashSize.1M256=1M (256K SPIFFS)
+espurnakmc.menu.FlashSize.1M256.build.flash_size=1M
+espurnakmc.menu.FlashSize.1M256.build.flash_size_bytes=0x100000
+espurnakmc.menu.FlashSize.1M256.build.flash_ld=eagle.flash.1m256.ld
+espurnakmc.menu.FlashSize.1M256.build.spiffs_pagesize=256
+espurnakmc.menu.FlashSize.1M256.upload.maximum_size=761840
+espurnakmc.menu.FlashSize.1M256.build.rfcal_addr=0xFC000
+espurnakmc.menu.FlashSize.1M256.build.spiffs_start=0xBB000
+espurnakmc.menu.FlashSize.1M256.build.spiffs_end=0xFB000
+espurnakmc.menu.FlashSize.1M256.build.spiffs_blocksize=4096
+espurnakmc.menu.FlashSize.1M512=1M (512K SPIFFS)
+espurnakmc.menu.FlashSize.1M512.build.flash_size=1M
+espurnakmc.menu.FlashSize.1M512.build.flash_size_bytes=0x100000
+espurnakmc.menu.FlashSize.1M512.build.flash_ld=eagle.flash.1m512.ld
+espurnakmc.menu.FlashSize.1M512.build.spiffs_pagesize=256
+espurnakmc.menu.FlashSize.1M512.upload.maximum_size=499696
+espurnakmc.menu.FlashSize.1M512.build.rfcal_addr=0xFC000
+espurnakmc.menu.FlashSize.1M512.build.spiffs_start=0x7B000
+espurnakmc.menu.FlashSize.1M512.build.spiffs_end=0xFB000
+espurnakmc.menu.FlashSize.1M512.build.spiffs_blocksize=8192
+espurnakmc.menu.LwIPVariant.v2mss536=v2 Lower Memory
+espurnakmc.menu.LwIPVariant.v2mss536.build.lwip_include=lwip2/include
+espurnakmc.menu.LwIPVariant.v2mss536.build.lwip_lib=-llwip2
+espurnakmc.menu.LwIPVariant.v2mss536.build.lwip_flags=-DLWIP_OPEN_SRC -DTCP_MSS=536
+espurnakmc.menu.LwIPVariant.v2mss1460=v2 Higher Bandwidth
+espurnakmc.menu.LwIPVariant.v2mss1460.build.lwip_include=lwip2/include
+espurnakmc.menu.LwIPVariant.v2mss1460.build.lwip_lib=-llwip2_1460
+espurnakmc.menu.LwIPVariant.v2mss1460.build.lwip_flags=-DLWIP_OPEN_SRC -DTCP_MSS=1460
+espurnakmc.menu.LwIPVariant.Prebuilt=v1.4 Higher Bandwidth
+espurnakmc.menu.LwIPVariant.Prebuilt.build.lwip_lib=-llwip_gcc
+espurnakmc.menu.LwIPVariant.Prebuilt.build.lwip_flags=-DLWIP_OPEN_SRC
+espurnakmc.menu.LwIPVariant.OpenSource=v1.4 Compile from source
+espurnakmc.menu.LwIPVariant.OpenSource.build.lwip_lib=-llwip_src
+espurnakmc.menu.LwIPVariant.OpenSource.build.lwip_flags=-DLWIP_OPEN_SRC
+espurnakmc.menu.LwIPVariant.OpenSource.recipe.hooks.sketch.prebuild.1.pattern=make -C "{runtime.platform.path}/tools/sdk/lwip/src" install TOOLS_PATH="{runtime.tools.xtensa-lx106-elf-gcc.path}/bin/xtensa-lx106-elf-"
+espurnakmc.menu.Debug.Disabled=Disabled
+espurnakmc.menu.Debug.Disabled.build.debug_port=
+espurnakmc.menu.Debug.Serial=Serial
+espurnakmc.menu.Debug.Serial.build.debug_port=-DDEBUG_ESP_PORT=Serial
+espurnakmc.menu.Debug.Serial1=Serial1
+espurnakmc.menu.Debug.Serial1.build.debug_port=-DDEBUG_ESP_PORT=Serial1
+espurnakmc.menu.DebugLevel.None____=None
+espurnakmc.menu.DebugLevel.None____.build.debug_level=
+espurnakmc.menu.DebugLevel.SSL=SSL
+espurnakmc.menu.DebugLevel.SSL.build.debug_level= -DDEBUG_ESP_SSL
+espurnakmc.menu.DebugLevel.TLS_MEM=TLS_MEM
+espurnakmc.menu.DebugLevel.TLS_MEM.build.debug_level= -DDEBUG_ESP_TLS_MEM
+espurnakmc.menu.DebugLevel.HTTP_CLIENT=HTTP_CLIENT
+espurnakmc.menu.DebugLevel.HTTP_CLIENT.build.debug_level= -DDEBUG_ESP_HTTP_CLIENT
+espurnakmc.menu.DebugLevel.HTTP_SERVER=HTTP_SERVER
+espurnakmc.menu.DebugLevel.HTTP_SERVER.build.debug_level= -DDEBUG_ESP_HTTP_SERVER
+espurnakmc.menu.DebugLevel.SSLTLS_MEM=SSL+TLS_MEM
+espurnakmc.menu.DebugLevel.SSLTLS_MEM.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM
+espurnakmc.menu.DebugLevel.SSLHTTP_CLIENT=SSL+HTTP_CLIENT
+espurnakmc.menu.DebugLevel.SSLHTTP_CLIENT.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_HTTP_CLIENT
+espurnakmc.menu.DebugLevel.SSLHTTP_SERVER=SSL+HTTP_SERVER
+espurnakmc.menu.DebugLevel.SSLHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_HTTP_SERVER
+espurnakmc.menu.DebugLevel.TLS_MEMHTTP_CLIENT=TLS_MEM+HTTP_CLIENT
+espurnakmc.menu.DebugLevel.TLS_MEMHTTP_CLIENT.build.debug_level= -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT
+espurnakmc.menu.DebugLevel.TLS_MEMHTTP_SERVER=TLS_MEM+HTTP_SERVER
+espurnakmc.menu.DebugLevel.TLS_MEMHTTP_SERVER.build.debug_level= -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_SERVER
+espurnakmc.menu.DebugLevel.HTTP_CLIENTHTTP_SERVER=HTTP_CLIENT+HTTP_SERVER
+espurnakmc.menu.DebugLevel.HTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+espurnakmc.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENT=SSL+TLS_MEM+HTTP_CLIENT
+espurnakmc.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENT.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT
+espurnakmc.menu.DebugLevel.SSLTLS_MEMHTTP_SERVER=SSL+TLS_MEM+HTTP_SERVER
+espurnakmc.menu.DebugLevel.SSLTLS_MEMHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_SERVER
+espurnakmc.menu.DebugLevel.SSLHTTP_CLIENTHTTP_SERVER=SSL+HTTP_CLIENT+HTTP_SERVER
+espurnakmc.menu.DebugLevel.SSLHTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+espurnakmc.menu.DebugLevel.TLS_MEMHTTP_CLIENTHTTP_SERVER=TLS_MEM+HTTP_CLIENT+HTTP_SERVER
+espurnakmc.menu.DebugLevel.TLS_MEMHTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+espurnakmc.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVER=SSL+TLS_MEM+HTTP_CLIENT+HTTP_SERVER
+espurnakmc.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVER.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER
+espurnakmc.menu.DebugLevel.CORE=CORE
+espurnakmc.menu.DebugLevel.CORE.build.debug_level= -DDEBUG_ESP_CORE
+espurnakmc.menu.DebugLevel.WIFI=WIFI
+espurnakmc.menu.DebugLevel.WIFI.build.debug_level= -DDEBUG_ESP_WIFI
+espurnakmc.menu.DebugLevel.HTTP_UPDATE=HTTP_UPDATE
+espurnakmc.menu.DebugLevel.HTTP_UPDATE.build.debug_level= -DDEBUG_ESP_HTTP_UPDATE
+espurnakmc.menu.DebugLevel.UPDATER=UPDATER
+espurnakmc.menu.DebugLevel.UPDATER.build.debug_level= -DDEBUG_ESP_UPDATER
+espurnakmc.menu.DebugLevel.OTA=OTA
+espurnakmc.menu.DebugLevel.OTA.build.debug_level= -DDEBUG_ESP_OTA
+espurnakmc.menu.DebugLevel.OOM=OOM
+espurnakmc.menu.DebugLevel.OOM.build.debug_level= -DDEBUG_ESP_OOM
+espurnakmc.menu.DebugLevel.COREWIFIHTTP_UPDATEUPDATEROTAOOM=CORE+WIFI+HTTP_UPDATE+UPDATER+OTA+OOM
+espurnakmc.menu.DebugLevel.COREWIFIHTTP_UPDATEUPDATEROTAOOM.build.debug_level= -DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_ESP_OOM
+espurnakmc.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVERCOREWIFIHTTP_UPDATEUPDATEROTAOOM=SSL+TLS_MEM+HTTP_CLIENT+HTTP_SERVER+CORE+WIFI+HTTP_UPDATE+UPDATER+OTA+OOM
+espurnakmc.menu.DebugLevel.SSLTLS_MEMHTTP_CLIENTHTTP_SERVERCOREWIFIHTTP_UPDATEUPDATEROTAOOM.build.debug_level= -DDEBUG_ESP_SSL -DDEBUG_ESP_TLS_MEM -DDEBUG_ESP_HTTP_CLIENT -DDEBUG_ESP_HTTP_SERVER -DDEBUG_ESP_CORE -DDEBUG_ESP_WIFI -DDEBUG_ESP_HTTP_UPDATE -DDEBUG_ESP_UPDATER -DDEBUG_ESP_OTA -DDEBUG_ESP_OOM
+espurnakmc.menu.DebugLevel.NoAssert-NDEBUG=NoAssert-NDEBUG
+espurnakmc.menu.DebugLevel.NoAssert-NDEBUG.build.debug_level= -DNDEBUG
+espurnakmc.menu.FlashErase.none=Only Sketch
+espurnakmc.menu.FlashErase.none.upload.erase_cmd=
+espurnakmc.menu.FlashErase.sdk=Sketch + WiFi Settings
+espurnakmc.menu.FlashErase.sdk.upload.erase_cmd=-ca "{build.rfcal_addr}" -cz 0x4000
+espurnakmc.menu.FlashErase.all=All Flash Contents
+espurnakmc.menu.FlashErase.all.upload.erase_cmd=-ca 0x0 -cz "{build.flash_size_bytes}"
+espurnakmc.menu.UploadSpeed.115200=115200
+espurnakmc.menu.UploadSpeed.115200.upload.speed=115200
+espurnakmc.menu.UploadSpeed.9600=9600
+espurnakmc.menu.UploadSpeed.9600.upload.speed=9600
+espurnakmc.menu.UploadSpeed.57600=57600
+espurnakmc.menu.UploadSpeed.57600.upload.speed=57600
+espurnakmc.menu.UploadSpeed.230400.linux=230400
+espurnakmc.menu.UploadSpeed.230400.macosx=230400
+espurnakmc.menu.UploadSpeed.230400.upload.speed=230400
+espurnakmc.menu.UploadSpeed.256000.windows=256000
+espurnakmc.menu.UploadSpeed.256000.upload.speed=256000
+espurnakmc.menu.UploadSpeed.460800.linux=460800
+espurnakmc.menu.UploadSpeed.460800.macosx=460800
+espurnakmc.menu.UploadSpeed.460800.upload.speed=460800
+espurnakmc.menu.UploadSpeed.512000.windows=512000
+espurnakmc.menu.UploadSpeed.512000.upload.speed=512000
+espurnakmc.menu.UploadSpeed.921600=921600
+espurnakmc.menu.UploadSpeed.921600.upload.speed=921600
+
+##############################################################
 espurna.name=ESPurna for ESP8266 based Modules
 espurna.menu.BoardModel.sonoffS20.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_S20
-espurna.menu.BoardModel.sonoffPOW=ITEAD Sonoff POW
-espurna.menu.BoardModel.sonoffLED.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_LED
-espurna.menu.BoardModel.sonoffSV.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_SV
 espurna.menu.BoardModel.sonoffRF.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_RF
-espurna.menu.BoardModel.sonoff1CHInching=ITEAD 1CH Inching
 espurna.menu.BoardModel.sonoffBNSZ01.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_BNSZ01
-espurna.menu.BoardModel.sonoffSV=ITEAD Sonoff SV
-espurna.menu.BoardModel.sonoffS20=ITEAD S20 Smart Socket
-espurna.menu.BoardModel.kmcSmartPlug.build.led=-DLED_BUILTIN=13
-espurna.menu.BoardModel.sonoffBasic=ITEAD Sonoff Basic
+espurna.menu.BoardModel.sonoffRFBridge=ITEAD Sonoff RF Bridge
 espurna.menu.BoardModel.sonoffDualR2.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_DUAL_R2
-espurna.menu.BoardModel.sonoffDualR2=ITEAD Sonoff Dual R2
+espurna.menu.BoardModel.sonoffLED.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_LED
+espurna.menu.BoardModel.sonoffRF=ITEAD Sonoff RF
 espurna.menu.BoardModel.kmcSmartPlug.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DKMC_70011
-espurna.menu.FlashMode.dout=DOUT
-espurna.build.led=-DLED_BUILTIN=13
-espurna.menu.BoardModel.sonoffRFBridge.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_RFBRIDGE
 espurna.menu.BoardModel.sonoffBNSZ01=ITEAD Sonoff BNSZ01
+espurna.menu.BoardModel.sonoffPOW.build.led=-DLED_BUILTIN=15
+espurna.menu.BoardModel.sonoffS20=ITEAD S20 Smart Socket
+espurna.menu.BoardModel.sonoffDualR2.build.led=-DLED_BUILTIN=13
+espurna.build.board=ESP8266_GENERIC
+espurna.menu.BoardModel.sonoffRF.build.led=-DLED_BUILTIN=13
+espurna.menu.BoardModel.sonoffBNSZ01.build.led=-DLED_BUILTIN=13
+espurna.menu.BoardModel.sonoffSV.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_SV
+espurna.menu.BoardModel.sonoffPOW=ITEAD Sonoff POW
+espurna.menu.BoardModel.sonoffBasic=ITEAD Sonoff Basic
+espurna.menu.BoardModel.sonoffDual.build.led=-DLED_BUILTIN=13
+espurna.menu.BoardModel.sonoffS20.build.led=-DLED_BUILTIN=13
 espurna.menu.BoardModel.sonoffPOW.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_POW
-espurna.menu.BoardModel.sonoffSlampher=ITEAD Slampher
 espurna.menu.BoardModel.sonoffTH=ITEAD Sonoff TH
 espurna.menu.BoardModel.sonoff1CHInching.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_1CH_INCHING
-espurna.menu.BoardModel.sonoffRFBridge=ITEAD Sonoff RF Bridge
-espurna.menu.BoardModel.kmcSmartPlug=KMC WiFi Smart Plug (70011)
+espurna.menu.BoardModel.sonoffLED.build.led=-DLED_BUILTIN=13
+espurna.menu.BoardModel.sonoff1CHInching.build.led=-DLED_BUILTIN=13
 espurna.menu.BoardModel.sonoffDual.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_DUAL
-espurna.menu.BoardModel.sonoffPOW.build.led=-DLED_BUILTIN=15
-espurna.menu.BoardModel.sonoffTH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_TH
-espurna.menu.BoardModel.sonoffSlampher.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SLAMPHER
-espurna.menu.BoardModel.iteadMotor.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_MOTOR
-espurna.menu.BoardModel.sonoffDual=ITEAD Sonoff Dual
 espurna.menu.BoardModel.iteadMotor=ITEAD Motor
-espurna.build.board=ESP8266_GENERIC
-espurna.menu.BoardModel.sonoffBasic.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_BASIC
+espurna.menu.BoardModel.sonoffSlampher.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SLAMPHER
+espurna.menu.BoardModel.iteadMotor.build.led=-DLED_BUILTIN=13
 espurna.menu.BoardModel.sonoffLED=ITEAD Sonoff LED
-espurna.menu.BoardModel.sonoffRF=ITEAD Sonoff RF
+espurna.menu.BoardModel.kmcSmartPlug.build.led=-DLED_BUILTIN=13
+espurna.menu.BoardModel.sonoffTH.build.led=-DLED_BUILTIN=13
+espurna.menu.BoardModel.sonoffDualR2=ITEAD Sonoff Dual R2
+espurna.menu.FlashMode.dout=DOUT
+espurna.menu.BoardModel.sonoffSV.build.led=-DLED_BUILTIN=13
+espurna.menu.BoardModel.sonoffSlampher=ITEAD Slampher
+espurna.menu.BoardModel.sonoffDual=ITEAD Sonoff Dual
+espurna.menu.BoardModel.kmcSmartPlug=KMC WiFi Smart Plug (70011)
+espurna.menu.BoardModel.sonoffTH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_TH
+espurna.menu.BoardModel.sonoffSV=ITEAD Sonoff SV
+espurna.menu.BoardModel.sonoffRFBridge.build.led=-DLED_BUILTIN=13
+espurna.menu.BoardModel.sonoffSlampher.build.led=-DLED_BUILTIN=13
+espurna.menu.BoardModel.sonoffBasic.build.led=-DLED_BUILTIN=13
+espurna.menu.BoardModel.sonoff1CHInching=ITEAD 1CH Inching
+espurna.menu.BoardModel.sonoffRFBridge.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_RFBRIDGE
+espurna.menu.BoardModel.iteadMotor.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_MOTOR
+espurna.menu.BoardModel.sonoffBasic.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_BASIC
 espurna.upload.tool=esptool
 espurna.upload.maximum_data_size=81920
 espurna.upload.wait_for_upload_port=true
@@ -1166,6 +1414,29 @@ espurna.menu.VTable.heap=Heap
 espurna.menu.VTable.heap.build.vtable_flags=-DVTABLES_IN_DRAM
 espurna.menu.VTable.iram=IRAM
 espurna.menu.VTable.iram.build.vtable_flags=-DVTABLES_IN_IRAM
+espurna.menu.espurna_ha.turnOnHaDomoticz=Domoticz
+espurna.menu.espurna_ha.turnOnHaDomoticz.build.espurna_ha_flags=-DHOMEASSISTANT_SUPPORT=0 -DTHINGSPEAK_SUPPORT=0 -DDOMOTICZ_SUPPORT=1
+espurna.menu.espurna_ha.turnOnHaHomeAssistant=Home Assistant
+espurna.menu.espurna_ha.turnOnHaHomeAssistant.build.espurna_ha_flags=-DHOMEASSISTANT_SUPPORT=1 -DTHINGSPEAK_SUPPORT=0 -DDOMOTICZ_SUPPORT=0
+espurna.menu.espurna_ha.turnOnHaThinkspeak=Thinkspeak
+espurna.menu.espurna_ha.turnOnHaThinkspeak.build.espurna_ha_flags=-DHOMEASSISTANT_SUPPORT=0 -DTHINGSPEAK_SUPPORT=1 -DDOMOTICZ_SUPPORT=0
+espurna.menu.espurna_ha.none=none
+espurna.menu.espurna_flags.none=none
+espurna.menu.espurna_flags.i2cSupport=I2C Support
+espurna.menu.espurna_flags.i2cSupport.build.espurna_flags=-DI2C_SUPPORT=1
+espurna.menu.espurna_flags.dallasSupport=Dallas Support
+espurna.menu.espurna_flags.dallasSupport.build.espurna_flags=-DDALLAS_SUPPORT=1
+espurna.menu.espurna_flags.dhtSupport=DHT Support
+espurna.menu.espurna_flags.dhtSupport.build.espurna_flags=-DDHT_SUPPORT=1
+espurna.menu.espurna_flags.hlw9012Support=HLW9012 Support
+espurna.menu.espurna_flags.hlw9012Support.build.espurna_flags=-DHLW8012_SUPPORT=1
+espurna.menu.my_project_flags.none=none
+espurna.menu.my_project_flags.nameresolv1=LLMNR Support
+espurna.menu.my_project_flags.nameresolv1.build.my_project_flags=-DLLMNR_SUPPORT
+espurna.menu.my_project_flags.nameresolv2=NetBIOS Support
+espurna.menu.my_project_flags.nameresolv2.build.my_project_flags=-DNETBIOS_SUPPORT
+espurna.menu.my_project_flags.nameresolv3=LLMNR and NetBIOS Support
+espurna.menu.my_project_flags.nameresolv3.build.my_project_flags=-DLLMNR_SUPPORT -DNETBIOS_SUPPORT
 espurna.menu.ResetMethod.none=none
 espurna.menu.ResetMethod.none.upload.resetmethod=none
 espurna.menu.ResetMethod.dtrset=dtrset
@@ -1322,29 +1593,6 @@ espurna.menu.FlashSize.16M15M.build.rfcal_addr=0xFFC000
 espurna.menu.FlashSize.16M15M.build.spiffs_start=0x100000
 espurna.menu.FlashSize.16M15M.build.spiffs_end=0xFFB000
 espurna.menu.FlashSize.16M15M.build.spiffs_blocksize=8192
-espurna.menu.espurna_ha.turnOnHaDomoticz=Domoticz
-espurna.menu.espurna_ha.turnOnHaDomoticz.build.espurna_ha_flags=-DHOMEASSISTANT_SUPPORT=0 -DTHINGSPEAK_SUPPORT=0 -DDOMOTICZ_SUPPORT=1
-espurna.menu.espurna_ha.turnOnHaHomeAssistant=Home Assistant
-espurna.menu.espurna_ha.turnOnHaHomeAssistant.build.espurna_ha_flags=-DHOMEASSISTANT_SUPPORT=1 -DTHINGSPEAK_SUPPORT=0 -DDOMOTICZ_SUPPORT=0
-espurna.menu.espurna_ha.turnOnHaThinkspeak=Thinkspeak
-espurna.menu.espurna_ha.turnOnHaThinkspeak.build.espurna_ha_flags=-DHOMEASSISTANT_SUPPORT=0 -DTHINGSPEAK_SUPPORT=1 -DDOMOTICZ_SUPPORT=0
-espurna.menu.espurna_ha.none=none
-espurna.menu.espurna_flags.none=none
-espurna.menu.espurna_flags.i2cSupport=I2C Support
-espurna.menu.espurna_flags.i2cSupport.build.espurna_flags=-DI2C_SUPPORT=1
-espurna.menu.espurna_flags.dallasSupport=Dallas Support
-espurna.menu.espurna_flags.dallasSupport.build.espurna_flags=-DDALLAS_SUPPORT=1
-espurna.menu.espurna_flags.dhtSupport=DHT Support
-espurna.menu.espurna_flags.dhtSupport.build.espurna_flags=-DDHT_SUPPORT=1
-espurna.menu.espurna_flags.hlw9012Support=HLW9012 Support
-espurna.menu.espurna_flags.hlw9012Support.build.espurna_flags=-DHLW8012_SUPPORT=1
-espurna.menu.my_project_flags.none=none
-espurna.menu.my_project_flags.nameresolv1=LLMNR Support
-espurna.menu.my_project_flags.nameresolv1.build.my_project_flags=-DLLMNR_SUPPORT
-espurna.menu.my_project_flags.nameresolv2=NetBIOS Support
-espurna.menu.my_project_flags.nameresolv2.build.my_project_flags=-DNETBIOS_SUPPORT
-espurna.menu.my_project_flags.nameresolv3=LLMNR and NetBIOS Support
-espurna.menu.my_project_flags.nameresolv3.build.my_project_flags=-DLLMNR_SUPPORT -DNETBIOS_SUPPORT
 espurna.menu.LwIPVariant.v2mss536=v2 Lower Memory
 espurna.menu.LwIPVariant.v2mss536.build.lwip_include=lwip2/include
 espurna.menu.LwIPVariant.v2mss536.build.lwip_lib=-llwip2
@@ -1446,7 +1694,6 @@ espurna85.name=ESPurna for ESP8285 based Modules
 espurna85.menu.BoardModel.sonoffT12CH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_T1_2CH
 espurna85.menu.BoardModel.sonoff4CHPro.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_4CH_PRO
 espurna85.menu.BoardModel.sonoffB1.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_B1
-espurna85.menu.led.13.build.led=-DLED_BUILTIN=13
 espurna85.menu.BoardModel.sonoff4CHPro=ITEAD Sonoff 4CH Pro
 espurna85.menu.BoardModel.sonoff4CH.build.extra_flags=-DESP8266 -DMQTT_MAX_PACKET_SIZE=400 -DESPURNA -DITEAD_SONOFF_4CH
 espurna85.menu.BoardModel.sonoffT13CH=ITEAD Sonoff T1 3CH
@@ -1485,6 +1732,29 @@ espurna85.menu.VTable.heap=Heap
 espurna85.menu.VTable.heap.build.vtable_flags=-DVTABLES_IN_DRAM
 espurna85.menu.VTable.iram=IRAM
 espurna85.menu.VTable.iram.build.vtable_flags=-DVTABLES_IN_IRAM
+espurna85.menu.espurna_ha.turnOnHaDomoticz=Domoticz
+espurna85.menu.espurna_ha.turnOnHaDomoticz.build.espurna_ha_flags=-DHOMEASSISTANT_SUPPORT=0 -DTHINGSPEAK_SUPPORT=0 -DDOMOTICZ_SUPPORT=1
+espurna85.menu.espurna_ha.turnOnHaHomeAssistant=Home Assistant
+espurna85.menu.espurna_ha.turnOnHaHomeAssistant.build.espurna_ha_flags=-DHOMEASSISTANT_SUPPORT=1 -DTHINGSPEAK_SUPPORT=0 -DDOMOTICZ_SUPPORT=0
+espurna85.menu.espurna_ha.turnOnHaThinkspeak=Thinkspeak
+espurna85.menu.espurna_ha.turnOnHaThinkspeak.build.espurna_ha_flags=-DHOMEASSISTANT_SUPPORT=0 -DTHINGSPEAK_SUPPORT=1 -DDOMOTICZ_SUPPORT=0
+espurna85.menu.espurna_ha.none=none
+espurna85.menu.espurna_flags.none=none
+espurna85.menu.espurna_flags.i2cSupport=I2C Support
+espurna85.menu.espurna_flags.i2cSupport.build.espurna_flags=-DI2C_SUPPORT=1
+espurna85.menu.espurna_flags.dallasSupport=Dallas Support
+espurna85.menu.espurna_flags.dallasSupport.build.espurna_flags=-DDALLAS_SUPPORT=1
+espurna85.menu.espurna_flags.dhtSupport=DHT Support
+espurna85.menu.espurna_flags.dhtSupport.build.espurna_flags=-DDHT_SUPPORT=1
+espurna85.menu.espurna_flags.hlw9012Support=HLW9012 Support
+espurna85.menu.espurna_flags.hlw9012Support.build.espurna_flags=-DHLW8012_SUPPORT=1
+espurna85.menu.my_project_flags.none=none
+espurna85.menu.my_project_flags.nameresolv1=LLMNR Support
+espurna85.menu.my_project_flags.nameresolv1.build.my_project_flags=-DLLMNR_SUPPORT
+espurna85.menu.my_project_flags.nameresolv2=NetBIOS Support
+espurna85.menu.my_project_flags.nameresolv2.build.my_project_flags=-DNETBIOS_SUPPORT
+espurna85.menu.my_project_flags.nameresolv3=LLMNR and NetBIOS Support
+espurna85.menu.my_project_flags.nameresolv3.build.my_project_flags=-DLLMNR_SUPPORT -DNETBIOS_SUPPORT
 espurna85.menu.ResetMethod.none=none
 espurna85.menu.ResetMethod.none.upload.resetmethod=none
 espurna85.menu.ResetMethod.dtrset=dtrset
@@ -1598,33 +1868,11 @@ espurna85.menu.led.11=11
 espurna85.menu.led.11.build.led=-DLED_BUILTIN=11
 espurna85.menu.led.12=12
 espurna85.menu.led.12.build.led=-DLED_BUILTIN=12
+espurna85.menu.led.13.build.led=-DLED_BUILTIN=13
 espurna85.menu.led.14=14
 espurna85.menu.led.14.build.led=-DLED_BUILTIN=14
 espurna85.menu.led.15=15
 espurna85.menu.led.15.build.led=-DLED_BUILTIN=15
-espurna85.menu.espurna_ha.turnOnHaDomoticz=Domoticz
-espurna85.menu.espurna_ha.turnOnHaDomoticz.build.espurna_ha_flags=-DHOMEASSISTANT_SUPPORT=0 -DTHINGSPEAK_SUPPORT=0 -DDOMOTICZ_SUPPORT=1
-espurna85.menu.espurna_ha.turnOnHaHomeAssistant=Home Assistant
-espurna85.menu.espurna_ha.turnOnHaHomeAssistant.build.espurna_ha_flags=-DHOMEASSISTANT_SUPPORT=1 -DTHINGSPEAK_SUPPORT=0 -DDOMOTICZ_SUPPORT=0
-espurna85.menu.espurna_ha.turnOnHaThinkspeak=Thinkspeak
-espurna85.menu.espurna_ha.turnOnHaThinkspeak.build.espurna_ha_flags=-DHOMEASSISTANT_SUPPORT=0 -DTHINGSPEAK_SUPPORT=1 -DDOMOTICZ_SUPPORT=0
-espurna85.menu.espurna_ha.none=none
-espurna85.menu.espurna_flags.none=none
-espurna85.menu.espurna_flags.i2cSupport=I2C Support
-espurna85.menu.espurna_flags.i2cSupport.build.espurna_flags=-DI2C_SUPPORT=1
-espurna85.menu.espurna_flags.dallasSupport=Dallas Support
-espurna85.menu.espurna_flags.dallasSupport.build.espurna_flags=-DDALLAS_SUPPORT=1
-espurna85.menu.espurna_flags.dhtSupport=DHT Support
-espurna85.menu.espurna_flags.dhtSupport.build.espurna_flags=-DDHT_SUPPORT=1
-espurna85.menu.espurna_flags.hlw9012Support=HLW9012 Support
-espurna85.menu.espurna_flags.hlw9012Support.build.espurna_flags=-DHLW8012_SUPPORT=1
-espurna85.menu.my_project_flags.none=none
-espurna85.menu.my_project_flags.nameresolv1=LLMNR Support
-espurna85.menu.my_project_flags.nameresolv1.build.my_project_flags=-DLLMNR_SUPPORT
-espurna85.menu.my_project_flags.nameresolv2=NetBIOS Support
-espurna85.menu.my_project_flags.nameresolv2.build.my_project_flags=-DNETBIOS_SUPPORT
-espurna85.menu.my_project_flags.nameresolv3=LLMNR and NetBIOS Support
-espurna85.menu.my_project_flags.nameresolv3.build.my_project_flags=-DLLMNR_SUPPORT -DNETBIOS_SUPPORT
 espurna85.menu.LwIPVariant.v2mss536=v2 Lower Memory
 espurna85.menu.LwIPVariant.v2mss536.build.lwip_include=lwip2/include
 espurna85.menu.LwIPVariant.v2mss536.build.lwip_lib=-llwip2

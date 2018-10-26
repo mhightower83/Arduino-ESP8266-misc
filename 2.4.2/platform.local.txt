@@ -111,6 +111,7 @@ recipe.hooks.linking.postlink.01.pattern.windows="{tools.elfsum.path}{tools.elfs
 # Alternative - reduces extra newlines on Windows, requires Git to be installed.
 recipe.hooks.linking.postlink.01.pattern.windows=cmd /c "{tools.elfsum.path}{tools.elfsum.cmd}" {tools.elfsum.flags} {tools.elfsum.extra_flags} "{build.path}\{build.project_name}.elf" | "{custom.gnutool.path}tr" "\r" "\b"
 
+
 #
 # This will write a .map file in the build directory.
 compiler.c.elf.extra_flags.linux=-Wl,-Map,{build.path}/{build.project_name}.map
@@ -134,6 +135,8 @@ recipe.hooks.core.prebuild.2.pattern=
 recipe.hooks.core.prebuild.1.pattern.windows=
 recipe.hooks.core.prebuild.2.pattern.windows=
 #
+# This block is not needed when ESP8266 Core is installed via
+# Arduino IDE Board Manager
 # Replacement recipes for creating core/core_version.h.
 # Moved the bash commands to script mk_core_version_h.sh.
 # For windows use bash shell from Git install to run script via runbash.bat

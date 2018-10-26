@@ -13,9 +13,17 @@ getcoreversion() {
     cd "${runtimeplatformpath}"
     if git_tag=`git describe --tags 2>/dev/null`; then
         echo \#define ARDUINO_ESP8266_GIT_DESC ${git_tag}
-        core_version="${git_tag%%-*}"
-        echo \#define ARDUINO_ESP8266_RELEASE_${core_version//./_}
-        echo \#define ARDUINO_ESP8266_RELEASE \"${core_version}\"
+        # Figure out what the package be called
+        plain_ver=`git describe --exact-match`
+        if [ $? -eq 0 ]; then
+            ver_define=`echo "$plain_ver" | tr "[:lower:].\055" "[:upper:]_"`
+            echo \#define ARDUINO_ESP8266_RELEASE_${ver_define}
+            echo \#define ARDUINO_ESP8266_RELEASE \"${ver_define}\"
+        else
+            ver_define=`echo "${git_tag%%-*}" | tr "[:lower:].\055" "[:upper:]_"`
+            echo \#define ARDUINO_ESP8266_RELEASE_${ver_define}
+            echo \#define ARDUINO_ESP8266_RELEASE \"${ver_define}-dev\"
+        fi
     else
         echo \#define ARDUINO_ESP8266_GIT_DESC "unix-${version}"
     fi
@@ -26,12 +34,11 @@ getshortsha1() {
     echo \#define ARDUINO_ESP8266_GIT_VER 0x${shortsha1}
 }
 
-#R mkdir -p "${buildpath}/core" && echo \#define ARDUINO_ESP8266_GIT_VER 0x`git --git-dir "${runtimeplatformpath}/.git" rev-parse --short=8 HEAD 2>/dev/null || echo ffffffff` >"${buildpath}/core/core_version.txt"
-#R mkdir -p "${buildpath}/core" && echo \#define ARDUINO_ESP8266_GIT_DESC `cd "${runtimeplatformpath}"; git describe --tags 2>/dev/null || echo unix-${version}` >>"${buildpath}/core/core_version.txt"
-
 mkdir -p "${buildpath}/core" || exit 1
-getshortsha1 >"${buildpath}/core/core_version.txt"
+echo \#ifndef\ ARDUINO_ESP8266_GIT_VER >"${buildpath}/core/core_version.txt"
+getshortsha1 >>"${buildpath}/core/core_version.txt"
 getcoreversion >>"${buildpath}/core/core_version.txt"
+echo \#endif >>"${buildpath}/core/core_version.txt"
 cmp -s "${buildpath}/core/core_version.txt" "${buildpath}/core/core_version.h" || cp "${buildpath}/core/core_version.txt" "${buildpath}/core/core_version.h"
 
 # echo "buildpath=\"${1}\""
