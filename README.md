@@ -4,6 +4,7 @@ Everything changes faster than I can keep up.**
 
 Some ESP8266 centric tweaks for the Arduino IDE setup that I find useful. The methods used here in principle should have applications with other 3rd Party *Board Manager* selections.
 
-The scope pf this WiKi has been expanded to also include more misc ESP8266 issues.
+This project has transistion into more of a Wiki collection of my hardware and software notes on the ESP8266.
+This includes many links to expaned subject matter.
 
 Go to [Wiki](https://github.com/mhightower83/Arduino-IDE-Tweaks/wiki) for details.
