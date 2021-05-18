@@ -7,4 +7,4 @@ Some ESP8266 centric tweaks for the Arduino IDE setup that I find useful. The me
 This project has transistion into more of a Wiki collection of my hardware and software notes on the ESP8266.
 This includes many links to expaned subject matter.
 
-Go to [Wiki](https://github.com/mhightower83/Arduino-IDE-Tweaks/wiki) for details.
+Go to [Wiki](https://github.com/mhightower83/Arduino-ESP8266-misc/wiki) for details.
