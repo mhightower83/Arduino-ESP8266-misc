@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GLOBALS_H
+#define GLOBALS_H
 /**
  * Defines, placed in this sketch's globals.h file, are unique to this sketch's
  * build. And will be used by all library and core modules for that build.
@@ -7,4 +8,5 @@
  */
 #if (__ASSEMBLER__ == 0)
 
+#endif
 #endif

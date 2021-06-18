@@ -37,6 +37,7 @@ custom.flags_txt.build.pathname={custom.build.path}{custom.flags_txt.name}
 
 
 compiler.global_flags=-include "{custom.ideglbl_h.build.pathname}" -include "{custom.globals_h.build.pathname}" -include "{custom.flags_txt.build.pathname}.h" @{custom.flags_txt.build.pathname}
+assembler.global_flags=-include "{custom.flags_txt.build.pathname}.h" @{custom.flags_txt.build.pathname}
 
 compiler.c.extra_flags={compiler.global_flags}
 compiler.S.extra_flags={compiler.global_flags}
@@ -51,17 +52,6 @@ compiler.cpp.extra_flags={compiler.global_flags}
 # file by its name with a .h extension. compiler_flags.txt's time stamp is
 # tracked and its ghost image is updated as needed.
 # ref https://stackoverflow.com/a/8055430 for && vs & usage in Windows cmd
-recipe.hooks.prebuild.11.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.build.path} (mkdir {custom.build.path} )"
-recipe.hooks.prebuild.12.pattern.windows=cmd /v:on /e:on /c "if     exist {custom.ideglbl_h.source.pathname} (copy {custom.ideglbl_h.source.pathname} {custom.ideglbl_h.build.pathname} )"
-recipe.hooks.prebuild.13.pattern.windows=cmd /v:on /e:on /c "if     exist {custom.globals_h.source.pathname} (copy {custom.globals_h.source.pathname} {custom.globals_h.build.pathname} )"
-recipe.hooks.prebuild.14.pattern.windows=cmd /v:on /e:on /c "if     exist {custom.flags_txt.source.pathname} (fc /b {custom.flags_txt.source.pathname} {custom.flags_txt.build.pathname} ) >nul 2>&1 || (copy {custom.flags_txt.source.pathname} {custom.flags_txt.build.pathname} & type NUL> {custom.flags_txt.build.pathname}.h )"
-recipe.hooks.prebuild.15.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.ideglbl_h.source.pathname} (for %f in ( {custom.ideglbl_h.build.pathname} ) do set size=%~zf) & (if not defined size set size=0) & (if !size! NEQ 0 type NUL> {custom.ideglbl_h.build.pathname} )"
-recipe.hooks.prebuild.16.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.globals_h.source.pathname} (for %f in ( {custom.globals_h.build.pathname} ) do set size=%~zf) & (if not defined size set size=0) & (if !size! NEQ 0 type NUL> {custom.globals_h.build.pathname} )"
-recipe.hooks.prebuild.17.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.flags_txt.source.pathname} (for %f in ( {custom.flags_txt.build.pathname} ) do set size=%~zf) & (if not defined size set size=0) & (if !size! NEQ 0 (type NUL> {custom.flags_txt.build.pathname} & type NUL> {custom.flags_txt.build.pathname}.h ) )"
-recipe.hooks.prebuild.18.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.ideglbl_h.build.pathname}   (type NUL> {custom.ideglbl_h.build.pathname} )"
-recipe.hooks.prebuild.19.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.globals_h.build.pathname}   (type NUL> {custom.globals_h.build.pathname} )"
-recipe.hooks.prebuild.20.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.flags_txt.build.pathname}   (type NUL> {custom.flags_txt.build.pathname} )"
-recipe.hooks.prebuild.21.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.flags_txt.build.pathname}.h (type NUL> {custom.flags_txt.build.pathname}.h )"
 
 recipe.hooks.prebuild.11.pattern.linux=mkdir -p "{custom.build.path}"
 recipe.hooks.prebuild.12.pattern.linux=bash -c "if [   -f {custom.ideglbl_h.source.pathname}  ]; then cp -u {custom.ideglbl_h.source.pathname} {custom.ideglbl_h.build.pathname}; fi;"
@@ -74,6 +64,19 @@ recipe.hooks.prebuild.18.pattern.linux=bash -c "if [ ! -f {custom.ideglbl_h.buil
 recipe.hooks.prebuild.19.pattern.linux=bash -c "if [ ! -f {custom.globals_h.build.pathname}   ]; then touch -t 170001010000 {custom.globals_h.build.pathname}; fi;"
 recipe.hooks.prebuild.20.pattern.linux=bash -c "if [ ! -f {custom.flags_txt.build.pathname}   ]; then touch -t 170001010000 {custom.flags_txt.build.pathname}; fi;"
 recipe.hooks.prebuild.21.pattern.linux=bash -c "if [ ! -f {custom.flags_txt.build.pathname}.h ]; then touch -t 170001010000 {custom.flags_txt.build.pathname}.h; fi;"
+
+recipe.hooks.prebuild.11.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.build.path} (mkdir {custom.build.path} )"
+recipe.hooks.prebuild.12.pattern.windows=cmd /v:on /e:on /c "if     exist {custom.ideglbl_h.source.pathname} (copy {custom.ideglbl_h.source.pathname} {custom.ideglbl_h.build.pathname} )"
+recipe.hooks.prebuild.13.pattern.windows=cmd /v:on /e:on /c "if     exist {custom.globals_h.source.pathname} (copy {custom.globals_h.source.pathname} {custom.globals_h.build.pathname} )"
+recipe.hooks.prebuild.14.pattern.windows=cmd /v:on /e:on /c "if     exist {custom.flags_txt.source.pathname} (fc /b {custom.flags_txt.source.pathname} {custom.flags_txt.build.pathname} ) >nul 2>&1 || (copy {custom.flags_txt.source.pathname} {custom.flags_txt.build.pathname} & type NUL> {custom.flags_txt.build.pathname}.h )"
+recipe.hooks.prebuild.15.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.ideglbl_h.source.pathname} (for %f in ( {custom.ideglbl_h.build.pathname} ) do set size=%~zf) & (if not defined size set size=0) & (if !size! NEQ 0 type NUL> {custom.ideglbl_h.build.pathname} )"
+recipe.hooks.prebuild.16.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.globals_h.source.pathname} (for %f in ( {custom.globals_h.build.pathname} ) do set size=%~zf) & (if not defined size set size=0) & (if !size! NEQ 0 type NUL> {custom.globals_h.build.pathname} )"
+recipe.hooks.prebuild.17.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.flags_txt.source.pathname} (for %f in ( {custom.flags_txt.build.pathname} ) do set size=%~zf) & (if not defined size set size=0) & (if !size! NEQ 0 (type NUL> {custom.flags_txt.build.pathname} & type NUL> {custom.flags_txt.build.pathname}.h ) )"
+recipe.hooks.prebuild.18.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.ideglbl_h.build.pathname}   (type NUL> {custom.ideglbl_h.build.pathname} )"
+recipe.hooks.prebuild.19.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.globals_h.build.pathname}   (type NUL> {custom.globals_h.build.pathname} )"
+recipe.hooks.prebuild.20.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.flags_txt.build.pathname}   (type NUL> {custom.flags_txt.build.pathname} )"
+recipe.hooks.prebuild.21.pattern.windows=cmd /v:on /e:on /c "if not exist {custom.flags_txt.build.pathname}.h (type NUL> {custom.flags_txt.build.pathname}.h )"
+
 #
 # from https://github.com/mhightower83/Arduino-IDE-Tweaks
 #
